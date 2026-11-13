@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="description" content="극장 마을을 걷고, 극장을 짓고, 오디션을 열며 알아보는 나의 공연 MBTI! 16가지 관객 유형과 지금 볼 수 있는 공연을 추천해드려요.">
+<meta property="og:title" content="틱키의 잃어버린 티켓 · 나의 공연 MBTI 게임">
+<meta property="og:description" content="픽셀 극장 마을에서 티켓 조각을 모으며 알아보는 나의 공연 MBTI">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#5b21b6">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AB%3C/text%3E%3C/svg%3E">
+<title>틱키의 잃어버린 티켓 · 공연 MBTI 타이쿤</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root{--p950:#12061f;--p900:#1a0b33;--p800:#2a1252;--p700:#5b21b6;--p600:#7c3aed;--p500:#8b5cf6;--p300:#c4b5fd;--p100:#ede9fe;
+  --lime:#d9f99d;--mint:#6ee7b7;--pink:#f9a8d4;--gold:#fcd34d;--ink:#140726;--cream:#fffaf2;
+  --st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+html{background:var(--p950)}
+body{min-height:100vh;overflow-x:hidden}
+body{font-family:'Gowun Dodum',sans-serif;color:var(--ink);
+  background:radial-gradient(circle at 15% 0%,rgba(124,58,237,.45),transparent 45%),radial-gradient(circle at 100% 100%,rgba(249,168,212,.15),transparent 40%),var(--p950)}
+canvas.px{image-rendering:pixelated;image-rendering:crisp-edges;display:block}
+.pix{font-family:'Press Start 2P',monospace}
+.jua{font-family:'Jua',sans-serif}
+.wrap{max-width:460px;margin:0 auto;min-height:100vh;padding:calc(10px + var(--st)) 12px calc(14px + var(--sb));position:relative}
+.view{display:none}.view.on{display:block;animation:vin .5s cubic-bezier(.2,1.3,.4,1)}
+@keyframes vin{from{opacity:0;transform:scale(.96) translateY(14px)}to{opacity:1;transform:none}}
+.btn{display:block;width:100%;text-align:center;text-decoration:none;font-family:'Jua';font-size:19px;border:3px solid var(--ink);border-radius:14px;
+  padding:13px 14px;cursor:pointer;background:var(--lime);color:var(--ink);box-shadow:0 5px 0 var(--ink);transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.btn.pu{background:var(--p600);color:#fff}.btn.wh{background:#fff}.btn.sm{font-size:15px;padding:9px 10px;box-shadow:0 4px 0 var(--ink)}
+.btn:disabled{opacity:.45;pointer-events:none}
+.card{background:var(--cream);border:3px solid var(--ink);border-radius:18px;box-shadow:6px 6px 0 var(--p700),6px 6px 0 3px var(--ink);padding:16px}
+
+/* ===== INTRO ===== */
+#intro{color:#fff;text-align:center;padding-top:10px}
+.kicker{display:inline-block;font-family:'Press Start 2P';font-size:8px;background:var(--lime);color:var(--ink);border:2px solid var(--ink);
+  padding:6px 8px;border-radius:6px;box-shadow:3px 3px 0 var(--ink);transform:rotate(-2deg)}
+.title{font-family:'Jua';font-size:44px;line-height:1.05;margin:16px 0 4px;letter-spacing:-1px;
+  text-shadow:0 4px 0 var(--p700),0 8px 0 var(--ink)}
+.title span{color:var(--lime)}
+.subt{font-family:'Jua';color:var(--p300);font-size:17px}
+#introCv{width:100%;max-width:400px;aspect-ratio:4/3;margin:18px auto 14px;border:3px solid var(--ink);border-radius:16px;box-shadow:0 6px 0 var(--ink)}
+.dialog{background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:14px;padding:14px 14px 12px;text-align:left;position:relative;min-height:96px;box-shadow:0 5px 0 var(--ink)}
+.dialog .who{position:absolute;top:-14px;left:12px;background:var(--p600);color:#fff;font-family:'Jua';font-size:14px;padding:3px 10px;border:2px solid var(--ink);border-radius:8px}
+.dialog p{font-family:'Jua';font-size:17px;line-height:1.5;min-height:52px}
+.dialog .next{position:absolute;right:12px;bottom:8px;font-family:'Press Start 2P';font-size:9px;color:var(--p600);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.feat{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:16px 0}
+.feat div{background:rgba(255,255,255,.06);border:2px dashed rgba(196,181,253,.4);border-radius:10px;padding:8px 2px;font-family:'Jua';font-size:12px;color:var(--p100)}
+.feat b{display:block;font-size:20px;margin-bottom:2px}
+
+/* ===== GAME ===== */
+.hud{display:flex;align-items:center;gap:8px;color:#fff;margin-bottom:8px}
+.slots{display:flex;gap:4px;background:rgba(0,0,0,.35);border:2px solid rgba(255,255,255,.25);border-radius:10px;padding:5px 6px}
+.slot{width:22px;height:16px;border:2px dashed rgba(255,255,255,.35);border-radius:3px}
+.slot.got{border:2px solid var(--ink);background:var(--gold);box-shadow:inset 0 -3px 0 #f59e0b;animation:slotin .6s cubic-bezier(.2,1.8,.4,1)}
+@keyframes slotin{0%{transform:scale(2.4) rotate(-20deg)}100%{transform:none}}
+.chipx{display:flex;align-items:center;gap:5px;background:rgba(0,0,0,.35);border:2px solid rgba(255,255,255,.25);border-radius:10px;padding:5px 8px;font-family:'Press Start 2P';font-size:9px}
+.chipx.bump{animation:bump .35s}
+@keyframes bump{50%{transform:scale(1.25)}}
+.hud .sp{flex:1}
+.iconbtn{background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.25);color:#fff;border-radius:10px;width:34px;height:34px;font-size:15px;cursor:pointer}
+.screen{position:relative;border:3px solid var(--ink);border-radius:16px;overflow:hidden;box-shadow:0 6px 0 var(--ink),0 0 0 3px var(--p700) inset}
+#cv{width:100%;height:auto;aspect-ratio:1/1;touch-action:none;cursor:pointer;background:#2a1252}
+.zoneTip{position:absolute;left:50%;top:10px;transform:translateX(-50%) translateY(-60px);background:var(--ink);color:#fff;font-family:'Jua';font-size:14px;
+  padding:6px 12px;border-radius:10px;border:2px solid var(--lime);transition:transform .3s cubic-bezier(.2,1.4,.4,1);white-space:nowrap;pointer-events:none}
+.zoneTip.on{transform:translateX(-50%) translateY(0)}
+.tut{position:absolute;inset:auto 10px 10px 10px;background:rgba(20,7,38,.88);color:#fff;border:2px solid var(--p300);border-radius:12px;padding:10px 12px;font-family:'Jua';font-size:14px;line-height:1.45;transition:opacity .4s}
+.tut b{color:var(--lime)}
+.mbti{display:flex;align-items:center;gap:8px;margin-top:12px;color:#fff}
+.mbti .lbl{font-family:'Jua';font-size:14px;color:var(--p300);white-space:nowrap}
+.letters{display:flex;gap:6px;flex:1}
+.lt{flex:1;height:44px;perspective:300px}
+.lt i{display:block;width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.3,1.5,.5,1)}
+.lt i b,.lt i em{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;align-items:center;justify-content:center;border:3px solid var(--ink);border-radius:10px;font-style:normal}
+.lt i b{background:var(--p800);color:var(--p300);font-family:'Press Start 2P';font-size:14px;border-color:rgba(255,255,255,.3)}
+.lt i em{background:var(--lime);color:var(--ink);transform:rotateY(180deg);font-family:'Press Start 2P';font-size:16px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.15)}
+.lt.on i{transform:rotateY(180deg)}
+.pad{display:flex;align-items:center;justify-content:space-between;margin-top:14px;gap:10px}
+.dpad{position:relative;width:138px;height:138px;flex:none}
+.dpad button{position:absolute;width:46px;height:46px;border:3px solid var(--ink);background:var(--p300);border-radius:10px;box-shadow:0 4px 0 var(--ink);
+  font-size:16px;color:var(--ink);cursor:pointer;touch-action:none}
+.dpad button.hold{transform:translateY(3px);box-shadow:0 1px 0 var(--ink);background:var(--lime)}
+.dpad .u{left:46px;top:0}.dpad .d{left:46px;top:92px}.dpad .l{left:0;top:46px}.dpad .r{left:92px;top:46px}
+.dpad .c{left:46px;top:46px;background:var(--p700);pointer-events:none;box-shadow:none}
+.side{flex:1;display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.abtn{height:74px;border-radius:50%;width:74px;align-self:flex-end;font-family:'Press Start 2P';font-size:16px;background:var(--pink);border:3px solid var(--ink);box-shadow:0 5px 0 var(--ink);cursor:pointer;color:var(--ink)}
+.abtn.glow{animation:glow 1s infinite;background:var(--lime)}
+@keyframes glow{50%{box-shadow:0 5px 0 var(--ink),0 0 0 8px rgba(217,249,157,.35)}}
+.abtn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.hint{font-family:'Jua';color:var(--p300);font-size:13px;text-align:right;line-height:1.4}
+.meter{margin-top:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.meter div{background:rgba(255,255,255,.06);border-radius:8px;padding:6px;text-align:center;font-family:'Jua';font-size:11px;color:var(--p300);border:2px solid rgba(255,255,255,.1)}
+.meter div.done{border-color:var(--lime);color:#fff}
+
+/* ===== MINIGAME MODAL ===== */
+.mg{position:fixed;inset:0;z-index:50;background:rgba(10,4,24,.78);display:none;align-items:center;justify-content:center;padding:14px;backdrop-filter:blur(3px)}
+.mg.on{display:flex}
+.mgbox{width:100%;max-width:440px;max-height:calc(100vh - 28px);overflow:auto;background:var(--cream);border:3px solid var(--ink);border-radius:20px;
+  box-shadow:0 8px 0 var(--ink);padding:16px;animation:mgin .5s cubic-bezier(.2,1.4,.4,1);position:relative}
+@keyframes mgin{from{transform:scale(.6) rotate(-4deg);opacity:0}to{transform:none;opacity:1}}
+.mgtop{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.mgtop .tag{font-family:'Press Start 2P';font-size:8px;background:var(--p600);color:#fff;padding:5px 7px;border-radius:5px;border:2px solid var(--ink)}
+.mgtop h3{font-family:'Jua';font-size:22px;flex:1}
+.mgtop .x{background:none;border:none;font-size:22px;cursor:pointer;color:var(--ink)}
+.mgdesc{font-size:14px;line-height:1.5;color:#4c3d66;margin-bottom:12px}
+.prog{display:flex;gap:5px;margin-bottom:12px}.prog i{flex:1;height:8px;border-radius:4px;background:#e4dcf5;border:2px solid var(--ink)}.prog i.f{background:var(--p500)}
+
+/* tycoon */
+.tyc{position:relative;border:3px solid var(--ink);border-radius:14px;overflow:hidden;background:#1a0b33}
+.tyc canvas{width:100%;height:auto}
+.tycstat{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.tycstat div{background:#fff;border:2px solid var(--ink);border-radius:10px;padding:8px;font-family:'Jua';font-size:13px;color:#5b4b77}
+.tycstat b{display:block;font-family:'Press Start 2P';font-size:11px;color:var(--ink);margin-top:5px}
+.budget{height:12px;border:2px solid var(--ink);border-radius:6px;background:#eee;overflow:hidden;margin-top:6px}.budget i{display:block;height:100%;background:var(--mint);transition:width .4s steps(8)}
+.items{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.item{display:flex;gap:8px;align-items:center;text-align:left;background:#fff;border:3px solid var(--ink);border-radius:12px;padding:8px;cursor:pointer;box-shadow:0 3px 0 var(--ink);
+  font-family:'Jua';font-size:14px;line-height:1.2;color:var(--ink);transition:transform .1s}
+.item canvas{width:34px;height:34px;flex:none;border-radius:6px;background:var(--p100)}
+.item small{display:block;font-family:'Gowun Dodum';font-size:11px;color:#6b5a86;margin-top:2px}
+.item .cost{font-family:'Press Start 2P';font-size:8px;color:var(--p700);margin-top:4px;display:block}
+.item.sel{background:var(--lime);transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.item.no{opacity:.4}
+.namein{width:100%;margin:10px 0;font-family:'Jua';font-size:17px;border:3px solid var(--ink);border-radius:12px;padding:10px 12px;background:#fff;-webkit-user-select:text;user-select:text}
+
+/* audition */
+.auds{display:grid;grid-template-columns:1fr 1fr;gap:10px;perspective:800px}
+.aud{background:#fff;border:3px solid var(--ink);border-radius:14px;padding:10px;text-align:center;cursor:pointer;box-shadow:0 5px 0 var(--ink);position:relative;overflow:hidden;
+  transition:transform .15s;transform-style:preserve-3d}
+.aud .st{height:136px;border-radius:10px;background:linear-gradient(#2a1252,#5b21b6);position:relative;overflow:hidden;border:2px solid var(--ink)}
+.aud .st:before{content:'';position:absolute;left:50%;top:-20px;width:120px;height:160px;transform:translateX(-50%);background:radial-gradient(ellipse at top,rgba(253,230,138,.55),transparent 70%)}
+.aud .st canvas{position:absolute;left:50%;bottom:4px;width:54px;height:72px;transform:translateX(-50%);animation:perf .6s ease-in-out infinite alternate}
+@keyframes perf{to{transform:translateX(-50%) translateY(-6px) rotate(3deg)}}
+.aud .fx{position:absolute;font-size:16px;animation:fx 1.6s linear infinite;opacity:0}
+@keyframes fx{0%{opacity:0;transform:translateY(20px) scale(.6)}20%{opacity:1}100%{opacity:0;transform:translateY(-60px) scale(1.2) rotate(20deg)}}
+.aud .bub{position:absolute;top:8px;left:6px;right:6px;background:#fff;border:2px solid var(--ink);border-radius:8px;font-family:'Jua';font-size:11px;padding:3px 4px;animation:bub 1.8s infinite}
+@keyframes bub{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.aud h4{font-family:'Jua';font-size:16px;margin:8px 0 2px}
+.aud p{font-size:11.5px;color:#6b5a86;line-height:1.35}
+.aud .pass{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jua';font-size:30px;color:#e11d48;pointer-events:none;opacity:0}
+.aud.win .pass{opacity:1;animation:stamp .5s cubic-bezier(.2,1.8,.4,1)}
+.aud.win .pass span{border:4px solid #e11d48;border-radius:10px;padding:2px 10px;transform:rotate(-14deg);background:rgba(255,255,255,.85)}
+@keyframes stamp{from{transform:scale(3);opacity:0}to{transform:none;opacity:1}}
+.aud.lose{opacity:.35;transform:scale(.94)}
+
+/* potion */
+.pot{position:relative;display:flex;justify-content:center;margin:4px 0 10px}
+.pot canvas{width:200px;height:auto}
+.ings{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ing{background:#fff;border:3px solid var(--ink);border-radius:12px;padding:8px 4px;text-align:center;cursor:pointer;box-shadow:0 4px 0 var(--ink);font-family:'Jua';font-size:13px;color:var(--ink)}
+.ing:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.ing canvas{width:40px;height:40px;margin:0 auto 4px}
+.drops{display:flex;gap:6px;justify-content:center;margin:6px 0 12px}
+.drops i{width:22px;height:22px;border-radius:50%;border:2px dashed #b9a8d8}
+.drops i.f{border:2px solid var(--ink);animation:slotin .5s cubic-bezier(.2,1.8,.4,1)}
+.flyer{position:fixed;z-index:80;pointer-events:none;width:34px;height:34px}
+.potname{text-align:center;font-family:'Jua';font-size:22px;margin:8px 0}
+
+/* reaction */
+.rscene{position:relative;height:170px;border:3px solid var(--ink);border-radius:14px;overflow:hidden;background:#1a0b33}
+.rscene canvas{width:100%;height:100%}
+.rq{font-family:'Jua';font-size:20px;text-align:center;margin:12px 0 8px;line-height:1.35;min-height:54px}
+.timer{height:14px;border:3px solid var(--ink);border-radius:8px;overflow:hidden;background:#eee;margin-bottom:12px}
+.timer i{display:block;height:100%;background:linear-gradient(90deg,#f43f5e,#fbbf24,#a3e635);width:100%}
+.rbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rbtns .btn{font-size:16px;padding:14px 6px;line-height:1.3}
+
+/* reward */
+.reward{text-align:center;padding:10px 0}
+.reward canvas{width:120px;height:auto;margin:0 auto;animation:spinY 1.6s ease-in-out infinite}
+@keyframes spinY{0%{transform:rotateY(0)}50%{transform:rotateY(180deg) scale(1.1)}100%{transform:rotateY(360deg)}}
+.reward h4{font-family:'Jua';font-size:24px;margin:10px 0 4px}
+.reward p{font-size:14px;color:#4c3d66;line-height:1.55}
+.reward .big{font-family:'Press Start 2P';font-size:30px;color:var(--p700);margin:10px 0;text-shadow:3px 3px 0 var(--lime)}
+
+/* ===== FINALE / RESULT ===== */
+.iris{position:fixed;inset:0;z-index:90;background:var(--ink);pointer-events:none;clip-path:circle(0% at 50% 50%)}
+.iris.close{animation:irisc .7s ease-in forwards}.iris.open{animation:iriso .8s ease-out forwards}
+@keyframes irisc{from{clip-path:circle(0% at 50% 50%)}to{clip-path:circle(150% at 50% 50%)}}
+@keyframes iriso{from{clip-path:circle(150% at 50% 50%)}to{clip-path:circle(0% at 50% 50%)}}
+.iris.full{clip-path:circle(150% at 50% 50%)}
+.assemble{position:relative;height:300px;display:flex;align-items:center;justify-content:center}
+.piece{position:absolute;width:90px;height:120px;border:3px solid var(--ink);background:var(--gold);box-shadow:inset 0 -6px 0 #f59e0b}
+.assemble .msg{position:absolute;bottom:0;left:0;right:0;text-align:center;color:#fff;font-family:'Jua';font-size:18px}
+
+.ticketStage{perspective:1100px;margin:6px 0 4px}
+.ticket{position:relative;border-radius:22px;transform-style:preserve-3d;transition:transform .15s ease-out;will-change:transform}
+.ticket .tface{position:relative;border:3px solid var(--ink);border-radius:22px;overflow:hidden;background:linear-gradient(160deg,#7c3aed,#4c1d95 60%,#2e1065);
+  color:#fff;padding:18px 16px 16px;box-shadow:0 10px 0 var(--ink)}
+.ticket .shine{position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,30%),rgba(255,255,255,.35),transparent 45%);mix-blend-mode:overlay;pointer-events:none}
+.ticket .holo{position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(217,249,157,.18) 45%,rgba(249,168,212,.18) 55%,transparent 70%);
+  background-size:250% 250%;animation:holo 4s linear infinite;pointer-events:none}
+@keyframes holo{from{background-position:100% 0}to{background-position:-100% 0}}
+.ticket .notch{position:absolute;top:58%;width:26px;height:26px;border-radius:50%;background:var(--p950);border:3px solid var(--ink)}
+.ticket .notch.l{left:-15px}.ticket .notch.r{right:-15px}
+.ticket .perf{position:absolute;left:18px;right:18px;top:calc(58% + 11px);border-top:3px dashed rgba(255,255,255,.35)}
+.tk-top{display:flex;justify-content:space-between;font-family:'Press Start 2P';font-size:8px;color:var(--p300)}
+.code{display:flex;gap:6px;justify-content:center;margin:14px 0 6px}
+.code span{width:58px;height:66px;display:flex;align-items:center;justify-content:center;font-family:'Press Start 2P';font-size:26px;border:3px solid var(--ink);border-radius:12px;
+  color:var(--ink);box-shadow:inset 0 -6px 0 rgba(0,0,0,.18),0 4px 0 var(--ink);animation:codein .6s cubic-bezier(.2,1.8,.4,1) both}
+@keyframes codein{from{transform:translateY(-40px) rotate(-20deg) scale(.4);opacity:0}}
+.tk-char{display:flex;justify-content:center;align-items:flex-end;gap:10px;margin:6px 0}
+.tk-char canvas{width:96px;height:96px;animation:bob 1.5s ease-in-out infinite;filter:drop-shadow(0 5px 0 rgba(0,0,0,.35))}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.tk-name{text-align:center;font-family:'Jua';font-size:24px;word-break:keep-all;line-height:1.15;text-shadow:0 3px 0 var(--ink)}
+.tk-one{text-align:center;font-size:13.5px;color:var(--p100);margin-top:6px;line-height:1.5}
+.tk-axes{display:grid;gap:7px;margin-top:30px}
+.ax{display:grid;grid-template-columns:52px 1fr 52px;align-items:center;gap:6px;font-family:'Jua';font-size:12px}
+.ax span:last-child{text-align:right}
+.ax .tr{height:14px;border:2px solid var(--ink);border-radius:7px;background:rgba(255,255,255,.15);position:relative;overflow:hidden}
+.ax .tr i{position:absolute;top:0;bottom:0;left:0;background:var(--lime);transition:width 1.2s cubic-bezier(.3,1.3,.5,1);width:0}
+.ax .on{color:var(--lime)}
+.tk-foot{display:flex;justify-content:space-between;margin-top:12px;font-family:'Press Start 2P';font-size:7px;color:var(--p300)}
+.rsec{margin-top:18px}
+.rhead{display:flex;align-items:center;gap:8px;color:#fff;font-family:'Jua';font-size:19px;margin-bottom:10px}
+.rhead .pix{font-size:8px;background:var(--p600);padding:4px 6px;border-radius:4px;border:2px solid #fff}
+.kw{display:flex;flex-wrap:wrap;gap:6px}
+.kw span{font-family:'Jua';font-size:14px;border:2px solid var(--ink);border-radius:20px;padding:4px 11px;background:#fff}
+.kw span:nth-child(odd){background:var(--lime)}
+.desc{font-size:14.5px;line-height:1.7;margin-top:10px}
+.rec{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:2px dashed #d8cdee}
+.rec:first-of-type{border-top:none}
+.rec canvas{width:58px;height:58px;border:3px solid var(--ink);border-radius:10px;flex:none}
+.rec b{font-family:'Jua';font-size:16px;display:block;line-height:1.25}
+.rec small{display:block;font-size:12px;color:#6b5a86;margin-top:2px;line-height:1.4}
+.gtag{display:inline-block;font-family:'Jua';font-size:11px;background:var(--p100);color:var(--p700);border:2px solid var(--ink);border-radius:10px;padding:1px 7px;margin-bottom:4px}
+.tk-char canvas.hop{animation:hop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes hop{0%{transform:translateY(0) scale(1,1)}20%{transform:translateY(4px) scale(1.15,.85)}50%{transform:translateY(-34px) scale(.9,1.1) rotate(-8deg)}80%{transform:translateY(0) scale(1.1,.9)}100%{transform:none}}
+.say{position:fixed;z-index:96;pointer-events:none;font-family:'Jua';font-size:18px;color:var(--ink);background:#fff;border:3px solid var(--ink);border-radius:12px;padding:4px 10px;box-shadow:0 3px 0 var(--ink);animation:say 1.1s ease-out forwards;white-space:nowrap}
+@keyframes say{0%{transform:translate(-50%,0) scale(.4);opacity:0}20%{transform:translate(-50%,-30px) scale(1.1);opacity:1}100%{transform:translate(-50%,-70px) scale(1);opacity:0}}
+#introCv{cursor:pointer}
+.rec img.poster{width:58px;height:80px;object-fit:cover;border:3px solid var(--ink);border-radius:10px;flex:none;background:#eee}
+.rec small{display:block}
+.rec a{font-family:'Jua';font-size:13px;color:var(--p700);text-decoration:none;display:inline-block;margin-top:4px}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.match .card{text-align:center;padding:12px}
+.match canvas{width:56px;height:56px;margin:4px auto}
+.match small{font-family:'Press Start 2P';font-size:7px;color:var(--p700)}
+.match b{display:block;font-family:'Jua';font-size:15px;line-height:1.25}
+.match em{font-style:normal;font-family:'Press Start 2P';font-size:10px;display:block;margin-top:4px}
+.log{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.log div{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:10px;padding:9px;color:var(--p300);font-family:'Jua';font-size:12px}
+.log b{display:block;color:#fff;font-size:15px;margin-top:3px;word-break:keep-all}
+.dex{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.dex div{background:#fff;border:2px solid var(--ink);border-radius:10px;padding:6px 2px;text-align:center;cursor:pointer}
+.dex div.me{background:var(--lime)}
+.dex canvas{width:34px;height:34px;margin:0 auto}
+.dex b{font-family:'Press Start 2P';font-size:7px;display:block;margin-top:3px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.foot{color:var(--p300);text-align:center;font-size:11.5px;line-height:1.6;margin-top:20px}
+.foot a{color:var(--lime)}
+.toast{position:fixed;left:50%;top:calc(14px + var(--st));transform:translate(-50%,-120px);background:var(--ink);color:#fff;font-family:'Jua';font-size:15px;
+  padding:10px 16px;border-radius:12px;border:2px solid var(--lime);z-index:99;transition:transform .35s cubic-bezier(.2,1.4,.4,1);white-space:nowrap}
+.toast.on{transform:translate(-50%,0)}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:95;width:100%;height:100%}
+.sheet{position:fixed;inset:0;z-index:70;background:rgba(10,4,24,.7);display:none;align-items:flex-end;justify-content:center}
+.sheet.on{display:flex}
+.sheet .in{width:100%;max-width:460px;background:var(--cream);border:3px solid var(--ink);border-radius:20px 20px 0 0;padding:16px 16px calc(18px + var(--sb));animation:up .35s cubic-bezier(.2,1.3,.4,1);max-height:80vh;overflow:auto}
+@keyframes up{from{transform:translateY(100%)}}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+<div class="iris" id="iris"></div>
+<div class="toast" id="toast"></div>
+
+<div class="wrap">
+<!-- INTRO -->
+<section class="view on" id="intro">
+  <span class="kicker">TIX-AI GAME ✦ PIXEL TYCOON RPG</span><button class="iconbtn" id="sndBtn2" style="position:absolute;right:12px;top:calc(10px + var(--st))">🔊</button>
+  <h1 class="title">틱키의<br><span>잃어버린 티켓</span></h1>
+  <p class="subt">걷고, 짓고, 고르면서 알아가는 나의 공연 MBTI</p>
+  <canvas class="px" id="introCv" width="160" height="120"></canvas>
+  <div class="dialog" id="dlg"><span class="who">틱키</span><p id="dlgTxt"></p><span class="next">▼</span></div>
+  <div class="feat"><div><b>🏗️</b>극장 짓기</div><div><b>🎤</b>오디션</div><div><b>🧪</b>감정 포션</div><div><b>⚡</b>리액션</div></div>
+  <button class="btn" id="goBtn">▶ 모험 시작하기</button>
+</section>
+
+<!-- GAME -->
+<section class="view" id="game">
+  <div class="hud">
+    <div class="slots" id="slots"><i class="slot"></i><i class="slot"></i><i class="slot"></i><i class="slot"></i></div>
+    <div class="chipx" id="coinChip">🪙 <span id="coinN">0</span></div>
+    <div class="chipx" id="fanChip">👥 <span id="fanN">0</span></div>
+    <span class="sp"></span>
+    <button class="iconbtn" id="sndBtn">🔊</button>
+  </div>
+  <div class="screen">
+    <canvas class="px" id="cv" width="240" height="240"></canvas>
+    <div class="zoneTip" id="zoneTip"></div>
+    <div class="tut" id="tut">🎮 <b>D-패드·방향키</b>로 걷거나 <b>화면을 탭</b>해서 이동해요.<br>건물 문 앞에서 <b>A 버튼</b>! 티켓 조각 4개를 모으면 중앙 극장이 열려요.</div>
+  </div>
+  <div class="mbti"><span class="lbl">나의 공연 MBTI</span>
+    <div class="letters" id="letters"></div></div>
+  <div class="pad">
+    <div class="dpad" id="dpad"><button class="u" data-d="u">▲</button><button class="l" data-d="l">◀</button><span class="c"></span><button class="r" data-d="r">▶</button><button class="d" data-d="d">▼</button></div>
+    <div class="side"><div class="hint" id="hint">탐험을 시작해 볼까요?<br>🪙 코인을 모으면 극장 예산이 늘어요</div><button class="abtn" id="abtn">A</button></div>
+  </div>
+  <div class="meter" id="meter"></div>
+</section>
+
+<!-- FINALE -->
+<section class="view" id="finale"></section>
+</div>
+
+<div class="mg" id="mg"><div class="mgbox" id="mgbox"></div></div>
+<div class="sheet" id="sheet"><div class="in" id="sheetIn"></div></div>
+
+<script type="application/json" id="showsFallback">{
+  "updated": "2026-11-13",
+  "_help": "공연을 추가하려면 shows 배열에 항목을 하나 더 넣으세요. 자세한 방법은 README.md 참고",
+  "shows": [
+    {
+      "id": "twocities",
+      "title": "뮤지컬 <두 도시 이야기>",
+      "genre": "musical",
+      "start": "2026-11-11",
+      "end": "2027-02-08",
+      "venue": "광림아트센터 BBCH홀",
+      "region": "서울 강남구",
+      "url": "https://nol.yanolja.com/ticket/products/26013098",
+      "types": [
+        "ENFJ",
+        "ISTJ",
+        "INFJ"
+      ]
+    },
+    {
+      "id": "sweeney",
+      "title": "뮤지컬 <스위니토드> 10주년",
+      "genre": "musical",
+      "start": "2026-12-04",
+      "end": "2027-05-02",
+      "venue": "디큐브 링크아트센터",
+      "region": "서울 구로구",
+      "url": "https://nol.yanolja.com/ticket/products/26014509",
+      "types": [
+        "ENTJ",
+        "ISTP",
+        "INTJ"
+      ]
+    },
+    {
+      "id": "phantom",
+      "title": "뮤지컬 <오페라의 유령> 40주년",
+      "genre": "musical",
+      "start": "2026-12-22",
+      "end": "2027-02-28",
+      "venue": "블루스퀘어 우리은행홀",
+      "region": "서울 용산구",
+      "url": "https://nol.yanolja.com/ticket/products/26013995",
+      "types": [
+        "ENTJ",
+        "ENFJ",
+        "INFP"
+      ],
+      "months": [
+        12,
+        1
+      ]
+    },
+    {
+      "id": "frozen",
+      "title": "뮤지컬 <겨울왕국> 한국 초연",
+      "genre": "musical",
+      "start": "2026-08-13",
+      "end": "2027-03-01",
+      "venue": "샤롯데씨어터",
+      "region": "서울 송파구",
+      "url": "https://nol.yanolja.com/ticket/products/26007416",
+      "types": [
+        "ENFJ",
+        "ENFP"
+      ],
+      "months": [
+        12,
+        1,
+        2
+      ]
+    },
+    {
+      "id": "doubtfire",
+      "title": "뮤지컬 <미세스 다웃파이어>",
+      "genre": "musical",
+      "start": "2026-12-03",
+      "end": "2027-02-21",
+      "venue": "GS아트센터",
+      "region": "서울 강남구",
+      "url": "https://nol.yanolja.com/ticket/products/26014015",
+      "types": [
+        "ESTJ",
+        "ESFJ",
+        "ESFP"
+      ],
+      "months": [
+        12
+      ]
+    },
+    {
+      "id": "chicago",
+      "title": "뮤지컬 <시카고>",
+      "genre": "musical",
+      "start": "2026-12-05",
+      "end": "2027-03-14",
+      "venue": "LG아트센터 서울 LG SIGNATURE홀",
+      "region": "서울 강서구",
+      "url": "https://nol.yanolja.com/ticket/products/L0000150",
+      "types": [
+        "ESFP",
+        "ENTJ"
+      ]
+    },
+    {
+      "id": "rebecca",
+      "title": "뮤지컬 <레베카>",
+      "genre": "musical",
+      "start": "2026-11-24",
+      "end": "2027-03-14",
+      "venue": "충무아트센터 대극장",
+      "region": "서울 중구",
+      "url": "https://nol.yanolja.com/ticket/products/26013993",
+      "types": [
+        "INTJ",
+        "INFJ"
+      ]
+    },
+    {
+      "id": "gone",
+      "title": "뮤지컬 <곤 투모로우> 10주년",
+      "genre": "musical",
+      "start": "2026-09-15",
+      "end": "2026-11-29",
+      "venue": "홍익대 대학로 아트센터 대극장",
+      "region": "서울 종로구",
+      "url": "https://nol.yanolja.com/ticket/products/26011520",
+      "types": [
+        "ISFJ",
+        "INFJ"
+      ]
+    },
+    {
+      "id": "laundry",
+      "title": "뮤지컬 <빨래> 32차 프로덕션",
+      "genre": "musical",
+      "start": "2026-06-11",
+      "end": "2027-02-21",
+      "venue": "NOL 유니플렉스 2관",
+      "region": "서울 종로구",
+      "url": "https://nol.yanolja.com/ticket/products/26007159",
+      "types": [
+        "ESFJ",
+        "ISFJ",
+        "ISFP"
+      ]
+    },
+    {
+      "id": "sleepnomore",
+      "title": "<슬립노모어 서울> 이머시브 연극",
+      "genre": "play",
+      "start": "2025-07-24",
+      "end": null,
+      "venue": "매키탄 호텔 (충무로)",
+      "region": "서울 중구",
+      "url": "https://nol.yanolja.com/ticket/products/25008376",
+      "types": [
+        "ENTP",
+        "ENFP",
+        "INTP"
+      ],
+      "openrun": true
+    },
+    {
+      "id": "rothko",
+      "title": "연극 <로스코>",
+      "genre": "play",
+      "start": "2026-11-13",
+      "end": "2026-11-15",
+      "venue": "LG아트센터 서울",
+      "region": "서울 강서구",
+      "url": "https://nol.yanolja.com/ticket/products/L0000135",
+      "types": [
+        "ENTP",
+        "ISTP",
+        "INTJ",
+        "INTP"
+      ]
+    },
+    {
+      "id": "glass",
+      "title": "연극 <유리동물원>",
+      "genre": "play",
+      "start": "2026-10-17",
+      "end": "2026-11-22",
+      "venue": "예술의전당 CJ 토월극장",
+      "region": "서울 서초구",
+      "url": "https://nol.yanolja.com/ticket/products/26011438",
+      "types": [
+        "ISTJ",
+        "ISFJ",
+        "INTP"
+      ]
+    },
+    {
+      "id": "flower",
+      "title": "연극 <꽃의 비밀>",
+      "genre": "play",
+      "start": "2026-09-12",
+      "end": "2026-11-29",
+      "venue": "링크아트센터 벅스홀",
+      "region": "서울 종로구",
+      "url": "https://nol.yanolja.com/ticket/products/26011174",
+      "types": [
+        "ESTJ",
+        "ESTP"
+      ]
+    },
+    {
+      "id": "killing",
+      "title": "연극 <죽여주는 이야기>",
+      "genre": "play",
+      "start": null,
+      "end": null,
+      "venue": "지인시어터",
+      "region": "서울 종로구",
+      "url": "https://nol.yanolja.com/ticket/products/26003518",
+      "types": [
+        "ESTP",
+        "ENTP"
+      ],
+      "openrun": true
+    },
+    {
+      "id": "criminal",
+      "title": "연극 <크리미널 시즌4>",
+      "genre": "play",
+      "start": null,
+      "end": null,
+      "venue": "봄날아트홀",
+      "region": "서울 종로구",
+      "url": "https://nol.yanolja.com/ticket/products/17000544",
+      "types": [
+        "ESTJ",
+        "ESTP",
+        "ISTJ",
+        "ISTP"
+      ],
+      "openrun": true
+    },
+    {
+      "id": "jaurim",
+      "title": "자우림 [MIDNIGHT EXPRESS 2026-2027] 서울",
+      "genre": "concert",
+      "start": "2026-12-18",
+      "end": "2026-12-20",
+      "venue": "올림픽공원 올림픽홀",
+      "region": "서울 송파구",
+      "url": "https://nol.yanolja.com/ticket/products/26015207",
+      "types": [
+        "ESFP"
+      ],
+      "months": [
+        12
+      ]
+    },
+    {
+      "id": "ghibli",
+      "title": "크리스마스 지브리 & 디즈니 OST 콘서트",
+      "genre": "classic",
+      "start": "2026-12-21",
+      "end": "2026-12-21",
+      "venue": "롯데콘서트홀",
+      "region": "서울 송파구",
+      "url": "https://nol.yanolja.com/ticket/products/26014525",
+      "types": [
+        "ESFJ",
+        "ENFP",
+        "ISFP",
+        "INFP"
+      ],
+      "months": [
+        12
+      ]
+    },
+    {
+      "id": "nutcracker",
+      "title": "유니버설발레단 <호두까기인형>",
+      "genre": "dance",
+      "start": "2026-12-17",
+      "end": "2026-12-30",
+      "venue": "세종문화회관 대극장",
+      "region": "서울 종로구",
+      "url": "https://nol.yanolja.com/ticket/places/P1001005/products/P0004869",
+      "types": [
+        "ISFP"
+      ],
+      "months": [
+        12
+      ]
+    },
+    {
+      "id": "knb",
+      "title": "국립발레단 <호두까기인형>",
+      "genre": "dance",
+      "start": "2026-12-12",
+      "end": "2026-12-27",
+      "venue": "예술의전당 오페라극장",
+      "region": "서울 서초구",
+      "url": "https://www.sac.or.kr/site/main/show/show_view?SN=86292",
+      "types": [
+        "INFP"
+      ],
+      "months": [
+        12
+      ]
+    }
+  ]
+}</script>
+<script>
+/* ================= UTIL ================= */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const cx2=c=>{const x=c.getContext('2d');x.imageSmoothingEnabled=false;return x};
+const R=(x,a,b,w,h,c)=>{x.fillStyle=c;x.fillRect(a,b,w,h)};
+function grid(x,rows,pal,ox=0,oy=0,flip=false){const w=rows[0].length;rows.forEach((r,y)=>{for(let i=0;i<w;i++){const ch=r[i];if(pal[ch])R(x,ox+(flip?w-1-i:i),oy+y,1,1,pal[ch])}})}
+function mk(w,h,cls){const c=document.createElement('canvas');c.width=w;c.height=h;c.className='px '+(cls||'');return c}
+function circ(x,cx,cy,r,c){for(let y=-r;y<=r;y++)for(let X=-r;X<=r;X++)if(X*X+y*y<=r*r+r*.6)R(x,cx+X,cy+y,1,1,c)}
+function toast(m,ms=2000){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),ms)}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+function hex2rgb(h){h=h.replace('#','');return[0,2,4].map(i=>parseInt(h.substr(i,2),16))}
+function rgb2hex(a){return'#'+a.map(v=>Math.round(v).toString(16).padStart(2,'0')).join('')}
+
+/* ================= SOUND ================= */
+let snd=true,AC=null;
+function tone(f=660,d=.07,type='square',v=.045,slide=0){if(!snd)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();
+  const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type=type;o.frequency.setValueAtTime(f,t);if(slide)o.frequency.exponentialRampToValueAtTime(f*slide,t+d);
+  g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d)}catch(e){}}
+const SFX={step:()=>tone(180,.03,'triangle',.02),coin:()=>{tone(988,.06);setTimeout(()=>tone(1319,.12),60)},sel:()=>tone(660,.06),
+  ok:()=>[523,659,784,1046].forEach((f,i)=>setTimeout(()=>tone(f,.12),i*90)),bad:()=>tone(200,.18,'sawtooth',.03,.6),
+  door:()=>tone(330,.2,'square',.04,2),pop:()=>tone(880,.05,'square',.04,1.5),fan:()=>tone(1200,.08,'triangle',.04,.7)};
+const SAYS=['히히힛!','키키킥~','꺄르륵!','헤헤 ✦','간지러워!','우히히!'];
+function laugh(){const pats=[[1100,1300,1050,1250,1000],[900,1200,950,1250],[1400,1200,1350,1150,1300,1100]];const pt=pats[Math.random()*pats.length|0];
+  pt.forEach((f,i)=>setTimeout(()=>{tone(f,.075,'square',.05,.82);tone(f*1.5,.05,'triangle',.02,.9)},i*85));setTimeout(()=>tone(600,.12,'triangle',.03,2.2),pt.length*85)}
+function floatSay(x,y,txt){const d=document.createElement('div');d.className='say';d.textContent=txt||SAYS[Math.random()*SAYS.length|0];d.style.left=x+'px';d.style.top=(y-20)+'px';
+  document.body.appendChild(d);setTimeout(()=>d.remove(),1100)}
+$('#sndBtn').onclick=()=>{snd=!snd;$('#sndBtn').textContent=snd?'🔊':'🔇';if(BGM.gain)BGM.gain.gain.value=snd?.9:0;SFX.sel()};
+
+/* ================= BGM (8-bit chiptune) ================= */
+const BGM={timer:null,next:0,step:0,track:null,gain:null,nb:null};
+const TRK={
+ intro:{bpm:88,lead:'triangle',drums:0,arp:0,roots:[48,45,41,43],q:[0,1,0,0],
+  mel:[[72,0,0,76,0,0,79,0,0,76,0,0,72,0,0,0],[69,0,0,72,0,0,76,0,0,72,0,0,74,0,0,0],[77,0,0,76,0,0,74,0,0,72,0,0,69,0,0,0],[74,0,0,71,0,0,67,0,0,71,0,0,74,0,0,0]]},
+ town:{bpm:120,lead:'square',drums:1,arp:1,roots:[48,45,41,43],q:[0,1,0,0],
+  mel:[[72,0,76,79,0,76,0,72,74,0,72,0,67,0,0,0],[69,0,72,76,0,72,0,69,71,0,72,0,74,0,0,0],[77,0,76,74,0,72,0,74,76,0,72,0,69,0,72,0],[74,0,71,67,0,71,0,74,79,0,77,0,74,0,0,0]]},
+ mini:{bpm:140,lead:'square',drums:2,arp:1,roots:[45,41,48,43],q:[1,0,0,0],
+  mel:[[69,72,76,72,69,72,76,79,77,76,74,72,71,72,74,0],[77,76,77,81,77,76,74,72,74,76,77,0,76,0,74,0],[72,76,79,76,72,76,79,84,83,81,79,77,76,77,79,0],[79,77,76,74,71,74,79,0,74,0,79,0,83,0,0,0]]},
+ end:{bpm:108,lead:'triangle',drums:1,arp:1,roots:[48,43,45,41],q:[0,0,1,0],
+  mel:[[84,0,79,0,76,0,79,0,84,0,86,0,88,0,0,0],[86,0,83,0,79,0,83,0,86,0,0,0,79,0,0,0],[84,0,81,0,76,0,81,0,84,0,88,0,86,0,84,0],[81,0,0,77,0,0,81,0,84,0,0,0,0,0,0,0]]}};
+const mf=n=>440*Math.pow(2,(n-69)/12);
+function bgmInit(){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();
+  if(!BGM.gain){BGM.gain=AC.createGain();BGM.gain.gain.value=snd?.9:0;BGM.gain.connect(AC.destination);
+   const n=AC.sampleRate*.4,b=AC.createBuffer(1,n,AC.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;BGM.nb=b}return true}catch(e){return false}}
+function bn(type,f,t,d,v){const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(v,t+.008);
+  g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(BGM.gain);o.start(t);o.stop(t+d+.03)}
+function bnz(t,d,v,hp){const s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=BGM.nb;f.type='highpass';f.frequency.value=hp;
+  g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);s.connect(f);f.connect(g);g.connect(BGM.gain);s.start(t);s.stop(t+d)}
+function bgmTick(){const T=TRK[BGM.track];if(!T)return;const sp=60/T.bpm/4;
+  while(BGM.next<AC.currentTime+.15){const t=BGM.next,st=BGM.step%16,bar=Math.floor(BGM.step/16)%4,root=T.roots[bar],ch=T.q[bar]?[0,3,7]:[0,4,7];
+    const n=T.mel[bar][st];if(n){bn(T.lead,mf(n),t,sp*(T.lead==='triangle'?2.6:1.6),T.lead==='triangle'?.075:.032);if(T.lead==='square')bn('triangle',mf(n+12),t,sp,.012)}
+    if(T.drums){if(st%4===0)bn('triangle',mf(root-12),t,sp*2.2,.11);if(st%8===6)bn('triangle',mf(root),t,sp*1.2,.08)}
+    else if(st===0||st===8)bn('triangle',mf(root-12),t,sp*7,.07);
+    if(T.arp&&st%2===1)bn('square',mf(root+24+ch[(st>>1)%3]),t,sp*.8,.012);
+    if(!T.drums&&st%4===2)bn('sine',mf(root+24+ch[(st>>2)%3]),t,sp*3,.025);
+    if(T.drums){if(st===0||st===8||(T.drums===2&&st===10)){bn('sine',140,t,.12,.22)}if(st===4||st===12)bnz(t,.09,.08,1800);if(st%2===0)bnz(t,.025,.025,7000)}
+    BGM.next+=sp;BGM.step++}}
+function bgmPlay(name){if(!bgmInit())return;if(BGM.track===name)return;BGM.track=name;BGM.step=0;BGM.next=AC.currentTime+.08;if(!BGM.timer)BGM.timer=setInterval(bgmTick,30)}
+$('#sndBtn2').onclick=e=>{e.stopPropagation();$('#sndBtn').click();$('#sndBtn2').textContent=snd?'🔊':'🔇';if(snd)bgmPlay(BGM.track||'intro')};
+document.addEventListener('visibilitychange',()=>{if(!AC)return;if(document.hidden)AC.suspend();else AC.resume()});
+document.addEventListener('pointerdown',function first(){if(!BGM.track&&$('#intro').classList.contains('on'))bgmPlay('intro');document.removeEventListener('pointerdown',first)},{once:false});
+
+
+/* ================= SPRITES ================= */
+const TK=["..KKKKKKKK..",".KPPPPPPPPK.","KPLPPPPPPPPK","KPWKPPPPWKPK","KPKKPPPPKKPK",".KPRPPPPRPK.",".KPPPMMPPPK.","KPPPPPPPPPPK","KPDPDPDPDPPK","KPPPPPPPPPPK",".KKKKKKKKKK.","..KK....KK.."];
+const TK2=TK.slice(0,11).concat(["...KK..KK..."]);
+const TKB=TK.map((r,i)=>i===3?"KPPPPPPPPPPK":i===4?"KPKKPPPPKKPK":r);
+const BASEPAL={K:'#140726',P:'#8b5cf6',L:'#c4b5fd',W:'#fff',R:'#f9a8d4',M:'#140726',D:'#5b21b6'};
+const pal=(p,l,d)=>Object.assign({},BASEPAL,{P:p,L:l,D:d});
+function tkCanvas(p,size=12){const c=mk(size,size);grid(cx2(c),TK,p);return c}
+// big 16 version for result
+const TK16=["................","...KKKKKKKKKK...","..KPPPPPPPPPPK..",".KPLLPPPPPPPPPK.",".KPLPPPPPPPPPPK.","KPPWWKPPPPWWKPPK","KPPWKKPPPPWKKPPK","KPPPPPPPPPPPPPPK",".KPRRPPMMPPRRPK.","..KPPPPMMPPPPK..",".KPPPPPPPPPPPPK.","KPPDPDPDPDPDPPPK","KPPPPPPPPPPPPPPK",".KPPPPPPPPPPPPK.","..KKKKKKKKKKKK..","....KK....KK...."];
+function tk16(p,code){const c=mk(16,16),x=cx2(c);grid(x,TK16,p);if(!code)return c;
+  if(code[0]==='E'){R(x,14,0,2,5,'#d9f99d');R(x,14,5,1,3,'#140726')}else{R(x,2,4,5,1,'#140726');R(x,9,4,5,1,'#140726');R(x,7,5,2,1,'#140726')}
+  if(code[1]==='N'){R(x,5,0,6,1,'#fcd34d');R(x,5,0,1,2,'#fcd34d');R(x,10,0,1,2,'#fcd34d');R(x,7,0,2,2,'#fcd34d')}else{R(x,4,1,8,1,p.D);R(x,6,0,4,1,p.D)}
+  if(code[2]==='F'){R(x,0,1,1,1,'#f43f5e');R(x,2,1,1,1,'#f43f5e');R(x,0,2,3,1,'#f43f5e');R(x,1,3,1,1,'#f43f5e')}else{R(x,0,1,3,2,'#fff');R(x,1,3,1,1,'#fff')}
+  if(code[3]==='P'){R(x,6,8,4,2,p.P);R(x,5,8,1,1,'#140726');R(x,10,8,1,1,'#140726');R(x,6,9,4,1,'#140726')}
+  return c}
+const PERSON=["....HHHH....","...HHHHHH...","...HSSSSH...","...SKSSKS...","...SSSSSS...","....SRRS....","..CCCCCCCC..",".CCCCCCCCCC.",".SCCCCCCCCS.",".SCCCCCCCCS.","..CCCCCCCC..","..PPPPPPPP..","..PPP..PPP..","..PPP..PPP..","..KKK..KKK..","................"];
+function personCanvas(h,c,p){const cv=mk(12,16);grid(cx2(cv),PERSON.map(r=>r.slice(0,12)),{H:h,S:'#fde2c8',K:'#140726',R:'#f43f5e',C:c,P:p});return cv}
+
+/* tiny icons 8x8 */
+const IC8={
+ drop:["...BB...","..BBB...","..BBBB..",".BBWBBB.",".BWBBBB.",".BBBBBB.","..BBBB..","........"],
+ rose:["..RRR...",".RRWRR..",".RRRRR..","..RRR...","...G....",".GGG....","...G....","...G...."],
+ moon:["..YYY...",".YY.....","YY......","YY......","YY......",".YY.....","..YYY...","........"],
+ mush:["..RRRR..",".RWRRWR.","RRRRRRRR","RRWRRRWR","...SS...","...SS...","..SSSS..","........"],
+ corn:[".Y.YY.Y.","YYYYYYYY",".YYYYYY.","RWRWRWRW","RWRWRWRW",".RWRWRW.",".RWRWRW.","........"],
+ bow:["..RRRR..",".RYYYYR.","RYGGGGYR","YGBBBBGY","GB....BG","B......B","........","........"],
+ chand:["...YY...","...YY...","YYYYYYYY",".W.W.W.W","YYYYYYYY","..YYYY..","..W..W..","........"],
+ spin:["..YYYY..",".Y....Y.","Y.RRRR.Y","Y.R..R.Y","Y.RRRR.Y",".Y....Y.","..YYYY..","........"],
+ seats:["RR.RR.RR","RR.RR.RR","........","RR.RR.RR","RR.RR.RR","........","RR.RR.RR","RR.RR.RR"],
+ pit:["...W....","..WW....","..W.W...","..W.....","WWW.....","WWW.....","BBBBBBBB","BBBBBBBB"],
+ led:["BBBBBBBB","BYGRBYGB","BGRBYGRB","BRBYGRBB","BBBBBBBB","...BB...","..BBBB..","........"],
+ cozy:["........","..RRRR..",".RRRRRR.",".RWWWWR.",".RRRRRR.",".R....R.",".R....R.","........"],
+ box:["BBBBBBBB","B......B","B..Y...B","B.YYY..B","B......B","B......B","BBBBBBBB","........"],
+ front:["Y.......",".Y......","..Y.....","RRRRRR..","RRRRRR..","........","SS..SS..","SS..SS.."],
+ book:["........","BBBB.RRR","BWWB.RWR","BWWB.RRR","BBBB.RRR","SSSSSSSS","S......S","........"],
+ star8:["...YY...","...YY...","YYYYYYYY",".YYYYYY.","..YYYY..",".YY..YY.","YY....YY","........"],
+ fly:["..Y.....","..Y..SS.","..Y.SSSS","..YYSSS.","..Y..SS.","..Y.S..S","..Y.....","BBBBBBBB"],
+ alley:["R...BB..","RR.BBBB.","RR.BWWB.","WR.BBBB.","RR.BWWB.","RR.BBBB.","SSSSSSSS","SSSSSSSS"],
+ clock:["..BBBB..",".BWWWWB.","BWWBWWWB","BWWBWWWB","BWWBBBWB","BWWWWWWB",".BWWWWB.","..BBBB.."],
+ scroll:[".YYYYYY.","Y.WWWW.Y",".WBBBBW.",".WWWWWW.",".WBBBWW.",".WWWWWW.","Y.WWWW.Y",".YYYYYY."],
+ dice:["WWWWWWW.","WBWWWBW.","WWWWWWW.","WWWBWWW.","WWWWWWW.","WBWWWBW.","WWWWWWW.","........"],
+ bolt:["....YY..","...YY...","..YY....",".YYYYYY.","....YY..","...YY...","..YY....",".Y......"],
+ feather:["......GG",".....GGG","....GGG.","...GGG..","..GGG...",".GG.....","G.......","........"],
+ stand:["..Y..Y..","Y..Y..Y.",".SS.SS.S",".SS.SS.S","SSSSSSSS",".S..S..S",".S..S..S","........"]
+};
+const ICPAL={B:'#3b82f6',W:'#fff',R:'#f43f5e',G:'#22c55e',Y:'#fbbf24',S:'#8b5cf6'};
+function ic(name,pad=0){const c=mk(8+pad*2,8+pad*2);grid(cx2(c),IC8[name],ICPAL,pad,pad);return c}
+
+/* ================= AXES & TYPES ================= */
+const AX=[{a:'E',b:'I',an:'참여',bn:'감상',zone:3},{a:'S',b:'N',an:'현실',bn:'상상',zone:0},
+          {a:'T',b:'F',an:'대사·구조',bn:'감성·음악',zone:1},{a:'J',b:'P',an:'계획',bn:'즉흥',zone:2}];
+const ZN=['극장 짓기','오디션','관람 포션','리액션'],ZI=['🏗️','🎤','🧪','⚡'];
+const axOfZone=z=>AX.findIndex(a=>a.zone===z);
+const SC={E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
+const LETTERS=[null,null,null,null];
+
+const SHOWS={
+ twocities:{t:'뮤지컬 <두 도시 이야기>',g:'대극장 뮤지컬',p:'2026.11.11 ~ 2027.02.08',v:'광림아트센터 BBCH홀',u:'https://nol.yanolja.com/ticket/products/26013098',c:['#7f1d1d','#1e3a8a']},
+ sweeney:{t:'뮤지컬 <스위니토드> 10주년',g:'스릴러 뮤지컬',p:'2026.12.04 ~ 2027.05.02',v:'디큐브 링크아트센터',u:'https://nol.yanolja.com/ticket/products/26014509',c:['#450a0a','#991b1b']},
+ phantom:{t:'뮤지컬 <오페라의 유령> 40주년',g:'클래식 뮤지컬',p:'2026.12.22 ~ 2027.02.28',v:'블루스퀘어 우리은행홀',u:'https://nol.yanolja.com/ticket/products/26013995',c:['#7f1d1d','#fbbf24']},
+ frozen:{t:'뮤지컬 <겨울왕국> 한국 초연',g:'가족 뮤지컬',p:'2026.08.13 ~ 2027.03.01',v:'샤롯데씨어터',u:'https://nol.yanolja.com/ticket/products/26007416',c:['#0c4a6e','#7dd3fc']},
+ doubtfire:{t:'뮤지컬 <미세스 다웃파이어>',g:'코미디 뮤지컬',p:'2026.12.03 ~ 2027.02.21',v:'GS아트센터',u:'https://nol.yanolja.com/ticket/products/26014015',c:['#fbbf24','#f9a8d4']},
+ chicago:{t:'뮤지컬 <시카고>',g:'쇼 뮤지컬',p:'2026.12.05 ~ 2027.03.14 · 14세+',v:'LG아트센터 서울 LG SIGNATURE홀',u:'https://nol.yanolja.com/ticket/products/L0000150',c:['#111827','#dc2626']},
+ rebecca:{t:'뮤지컬 <레베카>',g:'미스터리 뮤지컬',p:'2026.11.24 ~ 2027.03.14',v:'충무아트센터 대극장',u:'https://nol.yanolja.com/ticket/products/26013993',c:['#1f2937','#f97316']},
+ gone:{t:'뮤지컬 <곤 투모로우> 10주년',g:'창작 뮤지컬',p:'2026.09.15 ~ 11.29',v:'홍익대 대학로 아트센터 대극장',u:'https://nol.yanolja.com/ticket/products/26011520',c:['#1e293b','#c4b5fd']},
+ laundry:{t:'뮤지컬 <빨래> 32차 프로덕션',g:'소극장 뮤지컬',p:'2026.06.11 ~ 2027.02.21 · 14세+',v:'NOL 유니플렉스 2관 (대학로)',u:'https://nol.yanolja.com/ticket/products/26007159',c:['#7dd3fc','#fef3c7']},
+ sleepnomore:{t:'<슬립노모어 서울>',g:'이머시브 연극',p:'오픈런 · 만 19세 이상',v:'매키탄 호텔 (충무로)',u:'https://nol.yanolja.com/ticket/products/25008376',c:['#0b0b0f','#a16207']},
+ rothko:{t:'연극 <로스코>',g:'해외 초청 연극',p:'2026.11.13 ~ 11.15 · 약 4시간',v:'LG아트센터 서울',u:'https://nol.yanolja.com/ticket/products/L0000135',c:['#7f1d1d','#ea580c']},
+ glass:{t:'연극 <유리동물원>',g:'정통 연극',p:'2026.10.17 ~ 11.22',v:'예술의전당 CJ 토월극장',u:'https://nol.yanolja.com/ticket/products/26011438',c:['#1e3a8a','#bae6fd']},
+ flower:{t:'연극 <꽃의 비밀>',g:'코미디 연극',p:'2026.09.12 ~ 11.29',v:'링크아트센터 벅스홀 (대학로)',u:'https://nol.yanolja.com/ticket/products/26011174',c:['#fef3c7','#f472b6']},
+ killing:{t:'연극 <죽여주는 이야기>',g:'블랙코미디 연극',p:'오픈런 · 90분',v:'지인시어터 (대학로)',u:'https://nol.yanolja.com/ticket/products/26003518',c:['#18181b','#facc15']},
+ criminal:{t:'연극 <크리미널 시즌4>',g:'추리 스릴러 연극',p:'오픈런 · 90분',v:'봄날아트홀 (대학로)',u:'https://nol.yanolja.com/ticket/products/17000544',c:['#0f172a','#64748b']},
+ jaurim:{t:'자우림 [MIDNIGHT EXPRESS 2026-2027]',g:'밴드 콘서트',p:'2026.12.18 ~ 12.20 (서울)',v:'올림픽공원 올림픽홀',u:'https://nol.yanolja.com/ticket/products/26015207',c:['#1e1b4b','#a3e635']},
+ ghibli:{t:'크리스마스 지브리 & 디즈니 OST 콘서트',g:'오케스트라 콘서트',p:'2026.12.21',v:'롯데콘서트홀',u:'https://nol.yanolja.com/ticket/products/26014525',c:['#14532d','#fde68a']},
+ nutcracker:{t:'유니버설발레단 <호두까기인형>',g:'발레',p:'2026.12.17 ~ 12.30',v:'세종문화회관 대극장',u:'https://nol.yanolja.com/ticket/places/P1001005/products/P0004869',c:['#4c1d95','#be185d']},
+ knb:{t:'국립발레단 <호두까기인형>',g:'발레',p:'2026.12.12 ~ 12.27',v:'예술의전당 오페라극장',u:'https://www.sac.or.kr/site/main/show/show_view?SN=86292',c:['#1e3a8a','#f9a8d4']}
+};
+const TYPES={
+ ESTJ:{n:'티켓팅 1등 현실 코미디 반장',e:'📋',kw:['코미디','검증된 흥행작','가족 관람','예매 알람'],d:'예매 오픈 알람은 기본, 좌석 배치도까지 미리 공부하는 반장님. 공감 가는 현실 이야기에 확실한 웃음까지 주는 검증된 작품을 좋아해요.',r:['doubtfire','flower','criminal']},
+ ESTP:{n:'대학로 블랙코미디 행동대장',e:'🔥',kw:['블랙코미디','관객 참여','당일 관람','대학로'],d:'"오늘 뭐 보지?" 하면 바로 대학로로 출발하는 행동파. 배우가 말을 걸어도 당황하지 않고 받아치는 순발력의 소유자예요.',r:['killing','criminal','flower']},
+ ESFJ:{n:'온 가족 연말 공연 총무',e:'🎁',kw:['가족 뮤지컬','따뜻한 웃음','연말 공연','동행'],d:'누구와 가도 모두가 행복한 공연을 귀신같이 고르는 총무님. 함께 웃고 함께 울 수 있는 따뜻한 작품이 최고예요.',r:['doubtfire','laundry','ghibli']},
+ ESFP:{n:'커튼콜 떼창 파티피플',e:'🎉',kw:['콘서트','쇼 뮤지컬','떼창','스탠딩'],d:'조명, 안무, 밴드 사운드가 빵빵할수록 행복해지는 에너자이저. 커튼콜에서 가장 먼저 일어나 박수 치는 사람이 바로 당신!',r:['jaurim','chicago','doubtfire']},
+ ENTJ:{n:'브로드웨이 쇼 감별 CEO',e:'💼',kw:['라이선스 대작','브로드웨이','풍자','명배우'],d:'작품성과 흥행성을 동시에 따지는 냉철한 감별사. 무대 위 완성도와 날카로운 풍자가 살아있는 대작을 선호해요.',r:['chicago','sweeney','phantom']},
+ ENTP:{n:'이머시브 떡밥 탐정',e:'🕵️',kw:['이머시브','실험극','떡밥 해석','N회차'],d:'공연이 끝나면 해석 글부터 찾는 떡밥 수집가. 남들이 안 해본 새로운 형식의 공연일수록 눈이 반짝여요.',r:['sleepnomore','rothko','killing']},
+ ENFJ:{n:'샹들리에 아래 감동 전도사',e:'🕯️',kw:['대극장 뮤지컬','명곡','감동','추천 장인'],d:'본 공연을 주변에 열정적으로 영업하는 감동 전도사. 웅장한 넘버와 벅찬 서사가 있는 대작에서 가장 크게 울려요.',r:['phantom','frozen','twocities']},
+ ENFP:{n:'반짝반짝 판타지 모험가',e:'✨',kw:['판타지','무대 마법','OST','새로운 경험'],d:'현실은 잠시 로그아웃! 눈앞에서 마법이 펼쳐지는 무대를 사랑하는 모험가. 새롭고 신기한 공연이라면 일단 GO!',r:['frozen','ghibli','sleepnomore']},
+ ISTJ:{n:'명작 고전 정주행러',e:'📚',kw:['정통 연극','고전','명배우 연기','시대극'],d:'시간이 증명한 명작을 차근차근 정주행하는 성실한 관객. 탄탄한 희곡과 배우의 연기를 꼼꼼히 음미해요.',r:['glass','twocities','criminal']},
+ ISTP:{n:'밀실 추리 분석가',e:'🔍',kw:['추리극','스릴러','반전','두뇌 싸움'],d:'무대 위 단서를 조용히 모아 범인을 먼저 맞히는 분석가. 군더더기 없이 짜인 플롯과 반전에 짜릿함을 느껴요.',r:['criminal','sweeney','rothko']},
+ ISFJ:{n:'골목길 위로 수집가',e:'🧺',kw:['소극장 뮤지컬','위로','일상','여운'],d:'평범한 사람들의 이야기에서 큰 위로를 받는 따뜻한 관객. 공연장을 나서며 "나도 내일 힘내야지" 다짐하게 되는 작품을 좋아해요.',r:['laundry','gone','glass']},
+ ISFP:{n:'잔잔한 감성 산책러',e:'🌙',kw:['발레','소극장 뮤지컬','음악','감성'],d:'좋아하는 음악 속을 천천히 산책하듯 공연을 즐기는 감성파. 아름다운 선율과 몸짓에 조용히 빠져들어요.',r:['laundry','nutcracker','ghibli']},
+ INTJ:{n:'다크 고딕 마스터마인드',e:'🗝️',kw:['고딕 스릴러','서스펜스','치밀한 구성','다크'],d:'어둡고 기묘한 이야기 속 숨은 설계를 읽어내는 전략가. 서늘한 긴장감과 완벽한 구성이 있는 작품에 끌려요.',r:['sweeney','rebecca','rothko']},
+ INTP:{n:'실험극 탐구 연구원',e:'🧪',kw:['실험극','해외 초청작','새로운 형식','사유'],d:'"이건 왜 이렇게 연출했을까?"를 끝없이 탐구하는 연구원. 형식을 깨는 실험적인 무대에서 진가를 발견해요.',r:['rothko','sleepnomore','glass']},
+ INFJ:{n:'커튼 뒤 서사 사색가',e:'📖',kw:['대서사','시대극','희생과 구원','깊은 여운'],d:'인물의 선택과 운명을 오래 곱씹는 사색가. 시대를 관통하는 묵직한 이야기에서 잊지 못할 여운을 느껴요.',r:['twocities','rebecca','gone']},
+ INFP:{n:'꿈꾸는 발레 몽상가',e:'🩰',kw:['발레','클래식 뮤지컬','동화','낭만'],d:'아름다운 음악과 꿈같은 장면 속에서 마음이 몽글해지는 몽상가. 겨울밤 동화 같은 무대가 당신의 힐링이에요.',r:['knb','phantom','ghibli']}
+};
+function typeColor(code){const N=code[1]==='N',F=code[2]==='F',E=code[0]==='E';
+  if(N&&F)return E?['#ec4899','#fbcfe8','#9d174d']:['#a855f7','#e9d5ff','#6b21a8'];
+  if(N)return E?['#38bdf8','#e0f2fe','#075985']:['#6366f1','#e0e7ff','#3730a3'];
+  if(code[3]==='J')return E?['#10b981','#d1fae5','#047857']:['#14b8a6','#ccfbf1','#0f766e'];
+  return E?['#f59e0b','#fde68a','#b45309']:['#fb923c','#ffedd5','#c2410c']}
+const tpal=code=>{const[c1,c2,c3]=typeColor(code);return pal(c1,c2,c3)};
+
+
+/* ================= SHOW RECOMMENDER (날짜 기반) ================= */
+const GLABEL={musical:'뮤지컬',play:'연극',concert:'콘서트',classic:'클래식',dance:'무용·발레'};
+const GCOL={musical:['#7f1d1d','#f472b6'],play:['#1e3a8a','#a78bfa'],concert:['#1e1b4b','#a3e635'],classic:['#14532d','#fde68a'],dance:['#4c1d95','#f9a8d4']};
+const LG={E:{concert:2,musical:1},I:{classic:2,play:1,dance:1},S:{play:2,musical:1},N:{musical:2,dance:2,classic:1},T:{play:2},F:{musical:2,classic:1,dance:1},J:{classic:1,musical:1,dance:1},P:{concert:1,play:1}};
+const TODAY=(()=>{const q=new URLSearchParams(location.search).get('date');const d=q&&/^\d{4}-\d{2}-\d{2}$/.test(q)?new Date(q+'T00:00:00'):new Date();d.setHours(0,0,0,0);return d})();
+let CURATED=[],LIVE=[];
+try{CURATED=JSON.parse($('#showsFallback').textContent).shows}catch(e){}
+(async()=>{try{const r=await fetch('shows.json',{cache:'no-store'});if(r.ok){const j=await r.json();if(Array.isArray(j.shows)&&j.shows.length)CURATED=j.shows}}catch(e){}
+  try{const r=await fetch('/api/shows');if(r.ok){const j=await r.json();if(Array.isArray(j.shows))LIVE=j.shows}}catch(e){}})();
+const dOf=s=>s?new Date(s+'T00:00:00'):null,days=(a,b)=>Math.round((a-b)/86400000);
+const normT=t=>(t||'').replace(/[\s<>〈〉《》\[\]()'"·\-:]/g,'').replace(/^(뮤지컬|연극|콘서트)/,'').slice(0,10);
+function status(s){const st=dOf(s.start),en=dOf(s.end);if(en&&en<TODAY)return null;if(st&&days(st,TODAY)>45)return null;
+  if(st&&st>TODAY){const n=days(st,TODAY);return{k:'soon',txt:`D-${n} 개막`,n}}
+  if(s.openrun||!en)return{k:'run',txt:'오픈런 · 공연 중'};const left=days(en,TODAY);return left<=7?{k:'end',txt:left===0?'오늘 마지막 공연!':`마감 임박 D-${left}`}:{k:'run',txt:'지금 공연 중'}}
+const fmt=s=>s?s.replace(/-/g,'.'):'';
+function period(s){if(s.openrun||!s.end)return s.start?`${fmt(s.start)} ~ 오픈런`:'오픈런';return s.start===s.end?fmt(s.start):`${fmt(s.start)} ~ ${fmt(s.end)}`}
+function getRecs(code,n=3){const M=TODAY.getMonth()+1;const seen=new Set();const pool=[];
+  CURATED.forEach(s=>{const st=status(s);if(!st)return;seen.add(normT(s.title));pool.push({...s,st,src:'curated'})});
+  LIVE.forEach(s=>{const st=status(s);if(!st||!s.url||seen.has(normT(s.title)))return;seen.add(normT(s.title));pool.push({...s,st,src:'kopis'})});
+  pool.forEach(s=>{let sc=0;if((s.types||[]).includes(code))sc+=6;[...code].forEach(l=>sc+=(LG[l]&&LG[l][s.genre])||0);
+    if((s.months||[]).includes(M))sc+=2;sc+=s.st.k==='run'?1.5:s.st.k==='end'?1.2:.5;if(s.src==='curated')sc+=1;s.sc=sc+Math.random()*.3});
+  pool.sort((a,b)=>b.sc-a.sc);const out=[];const gcount={};
+  while(out.length<n&&pool.length){pool.forEach(s=>s.adj=s.sc-(gcount[s.genre]||0)*1.6);pool.sort((a,b)=>b.adj-a.adj);const s=pool.shift();out.push(s);gcount[s.genre]=(gcount[s.genre]||0)+1}
+  return out}
+function whyLine(s,code){const r=[];if((s.types||[]).includes(code))r.push(`${code}에게 딱 맞는 작품`);const g=GLABEL[s.genre];const fit=[...code].filter(l=>LG[l]&&LG[l][s.genre]);if(fit.length)r.push(`${fit.join('·')} 성향 × ${g}`);
+  if((s.months||[]).includes(TODAY.getMonth()+1))r.push(`${TODAY.getMonth()+1}월 시즌 추천`);return r.join(' · ')||`${g} 취향 저격`}
+
+/* ================= INTRO ================= */
+const STORY=['앗…! 오늘 밤 공연 <b>골든 티켓</b>을 잃어버렸어! 😭','바람에 날아간 티켓이 <b>네 조각</b>으로 찢어져서 극장 마을 곳곳에 떨어졌대.','같이 조각을 찾아줄래? 모험하다 보면 <b>너의 공연 MBTI</b>도 알게 될 거야! ✦','참, 심심하면 나를 <b>콕</b> 눌러봐. 히히! 😆'];
+let sIdx=0,typing=null;
+function typeLine(i){const el=$('#dlgTxt');const html=STORY[i];let n=0;clearInterval(typing);const plain=html;
+  typing=setInterval(()=>{n++;el.innerHTML=plain.slice(0,n).replace(/<[^>]*$/,'');if(n%2)tone(500+Math.random()*200,.03,'square',.02);if(n>=plain.length){clearInterval(typing);el.innerHTML=plain}},28)}
+typeLine(0);
+$('#dlg').onclick=()=>{sIdx=(sIdx+1)%STORY.length;typeLine(sIdx);SFX.sel()};
+let introJump=0;
+(function introAnim(){const c=$('#introCv'),x=cx2(c);let t=0;
+  c.addEventListener('click',e=>{laugh();introJump=26;floatSay(e.clientX,e.clientY)});const stars=Array.from({length:40},()=>[Math.random()*160,Math.random()*70,Math.random()*6]);
+  const pieces=[0,1,2,3].map(i=>({a:i*1.57,r:30}));
+  function f(){t++;R(x,0,0,160,120,'#1a0b33');
+    for(let y=0;y<80;y++){if(y%2===0)R(x,0,y,160,1,y<40?'#1e0d3d':'#25104d')}
+    stars.forEach(s=>{const a=(Math.sin(t/20+s[2])+1)/2;R(x,s[0]|0,s[1]|0,1,1,a>.5?'#ede9fe':'#6d28d9')});
+    circ(x,130,18,8,'#fef3c7');circ(x,134,15,7,'#1e0d3d');
+    // town silhouette
+    [[0,70,20,30],[18,62,16,40],[34,74,22,30],[110,66,18,40],[126,72,20,30],[144,60,16,40]].forEach(b=>{R(x,...b,'#2e1065');for(let i=0;i<3;i++)R(x,b[0]+4+i*5,b[1]+6,2,3,(t/30+i)%3<2?'#fde68a':'#4c1d95')});
+    // theater
+    R(x,56,58,48,42,'#4c1d95');R(x,52,52,56,8,'#7c3aed');for(let i=0;i<14;i++)R(x,54+i*4,54,2,2,(i+(t>>3))%2?'#fde68a':'#f472b6');
+    R(x,72,76,16,24,'#140726');R(x,64,64,32,8,'#fbbf24');
+    R(x,0,100,160,20,'#3b1d6e');for(let i=0;i<160;i+=8)R(x,i+((t>>2)%8),106,4,1,'#5b2a96');
+    // pieces orbit
+    pieces.forEach((p,i)=>{const a=p.a+t/40,px=80+Math.cos(a)*44,py=40+Math.sin(a)*14;R(x,px|0,py|0,7,9,'#140726');R(x,(px|0)+1,(py|0)+1,5,7,'#fcd34d');if(t%20<10)R(x,(px|0)+2,(py|0)+2,1,1,'#fff')});
+    // tikki
+    let bob=Math.round(Math.sin(t/8)*2);if(introJump>0){introJump--;bob-=Math.round(Math.sin((26-introJump)/26*Math.PI)*22);for(let i=0;i<3;i++)R(x,70+((t*7+i*9)%22),84+bob-((t+i*5)%10),2,2,'#f9a8d4')}grid(x,t%90<6||introJump>0?TKB:TK,BASEPAL,74,86+bob);
+    if((t>>4)%2)R(x,86,86+bob,2,3,'#7dd3fc');
+    requestAnimationFrame(f)}f()})();
+
+/* ================= MAP ================= */
+const TS=16,MW=24,MH=21,VW=240,VH=240;
+const map=[];for(let y=0;y<MH;y++){map.push(Array(MW).fill('.'))}
+const setT=(x,y,c)=>{if(map[y]&&map[y][x]!==undefined)map[y][x]=c};
+for(let x=0;x<MW;x++){setT(x,0,'T');setT(x,MH-1,'T')}for(let y=0;y<MH;y++){setT(0,y,'T');setT(MW-1,y,'T')}
+const pathH=(y,x0,x1)=>{for(let x=x0;x<=x1;x++)setT(x,y,'=')},pathV=(x,y0,y1)=>{for(let y=y0;y<=y1;y++)setT(x,y,'=')};
+pathH(11,1,22);pathH(18,1,22);pathV(4,6,11);pathV(19,6,11);pathV(4,17,18);pathV(19,17,18);pathV(11,10,18);pathV(12,10,18);pathV(8,11,18);pathV(15,11,18);
+for(let y=7;y<=9;y++)for(let x=6;x<=8;x++)setT(x,y,'w');
+for(let y=7;y<=9;y++)for(let x=15;x<=17;x++)setT(x,y,'f');
+[[8,2],[9,3],[15,2],[14,3],[7,14],[10,15],[13,15],[16,15],[21,12],[2,12],[6,19],[20,19],[1,6],[22,6]].forEach(([x,y])=>setT(x,y,'T'));
+const ZONES=[
+ {id:0,name:'극장 건설 부지',icon:'🏗️',x:2,y:2,w:5,h:4,roof:'#f97316',wall:'#fed7aa',door:'b'},
+ {id:1,name:'별빛 오디션장',icon:'🎤',x:17,y:2,w:5,h:4,roof:'#ec4899',wall:'#fbcfe8',door:'b'},
+ {id:2,name:'감정 포션 공방',icon:'🧪',x:2,y:13,w:5,h:4,roof:'#10b981',wall:'#d1fae5',door:'b'},
+ {id:3,name:'리액션 스테이지',icon:'⚡',x:17,y:13,w:5,h:4,roof:'#3b82f6',wall:'#dbeafe',door:'b'}];
+const GATE={x:9,y:5,w:6,h:5};
+ZONES.forEach(z=>{z.px=z.x*TS;z.py=z.y*TS;z.pw=z.w*TS;z.ph=z.h*TS;z.dx=z.px+z.pw/2;z.dy=z.py+z.ph+8;z.done=false});
+GATE.px=GATE.x*TS;GATE.py=GATE.y*TS;GATE.pw=GATE.w*TS;GATE.ph=GATE.h*TS;GATE.dx=GATE.px+GATE.pw/2;GATE.dy=GATE.py+GATE.ph+8;
+const solids=[...ZONES.map(z=>[z.px,z.py,z.pw,z.ph]),[GATE.px,GATE.py,GATE.pw,GATE.ph]];
+function blocked(px,py){ // feet box
+  const x0=px-5,x1=px+5,y0=py-4,y1=py+2;
+  for(const [x,y] of [[x0,y0],[x1,y0],[x0,y1],[x1,y1]]){const tx=Math.floor(x/TS),ty=Math.floor(y/TS);const t=map[ty]&&map[ty][tx];if(!t||t==='T'||t==='w')return true}
+  for(const s of solids){if(x1>s[0]&&x0<s[0]+s[2]&&y1>s[1]&&y0<s[1]+s[3])return true}return false}
+
+function walkTile(tx,ty){if(tx<0||ty<0||tx>=MW||ty>=MH)return false;const t=map[ty][tx];if(t==='T'||t==='w')return false;
+  const cx=tx*TS+8,cy=ty*TS+8;return !blocked(cx,cy)}
+function findPath(wx,wy){const sx=Math.floor(P.x/TS),sy=Math.floor((P.y-2)/TS);let ex=Math.floor(wx/TS),ey=Math.floor(wy/TS);
+  if(!walkTile(ex,ey)){let best=null,bd=1e9;for(let y=ey-3;y<=ey+3;y++)for(let x=ex-3;x<=ex+3;x++)if(walkTile(x,y)){const d=Math.hypot(x-ex,y-ey);if(d<bd){bd=d;best=[x,y]}}if(!best)return null;[ex,ey]=best}
+  const prev=new Map(),k=(x,y)=>x+','+y,q=[[sx,sy]];prev.set(k(sx,sy),null);
+  while(q.length){const [x,y]=q.shift();if(x===ex&&y===ey)break;for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy;if(!prev.has(k(nx,ny))&&walkTile(nx,ny)){prev.set(k(nx,ny),[x,y]);q.push([nx,ny])}}}
+  if(!prev.has(k(ex,ey)))return null;const path=[];let c=[ex,ey];while(c){path.unshift({x:c[0]*TS+8,y:c[1]*TS+10});c=prev.get(k(c[0],c[1]))}path.shift();return path}
+let COINS=[[2,9],[21,8],[9,13],[14,16],[5,19],[18,19],[22,11],[1,15]].map(([x,y])=>({x:x*TS+8,y:y*TS+8,got:false,ph:Math.random()*6}));
+
+// static background
+const BG=mk(MW*TS,MH*TS);(function drawBG(){const x=cx2(BG);
+  for(let ty=0;ty<MH;ty++)for(let tx=0;tx<MW;tx++){const X=tx*TS,Y=ty*TS,t=map[ty][tx];
+    R(x,X,Y,TS,TS,(tx+ty)%2?'#3b1d6e':'#3f2075');
+    if(t==='.'||t==='T'||t==='f'){if((tx*7+ty*13)%5===0){R(x,X+3,Y+9,1,2,'#5b2a96');R(x,X+5,Y+8,1,3,'#5b2a96');R(x,X+7,Y+10,1,1,'#5b2a96')}
+      if((tx*11+ty*3)%9===0){R(x,X+11,Y+4,2,2,'#f9a8d4');R(x,X+12,Y+3,1,1,'#fde68a')}}
+    if(t==='='){R(x,X,Y,TS,TS,'#7c5bbf');R(x,X+1,Y+1,6,6,'#8b6fd0');R(x,X+9,Y+2,6,5,'#8b6fd0');R(x,X+2,Y+9,5,6,'#8b6fd0');R(x,X+9,Y+9,6,6,'#8b6fd0');R(x,X,Y+15,TS,1,'#6a4bab')}
+    if(t==='w'){R(x,X,Y,TS,TS,'#312e81');R(x,X+2,Y+4,5,1,'#4f46e5');R(x,X+8,Y+10,6,1,'#4f46e5')}
+    if(t==='f'){R(x,X+3,Y+3,3,3,'#f472b6');R(x,X+4,Y+4,1,1,'#fde68a');R(x,X+10,Y+9,3,3,'#a78bfa');R(x,X+11,Y+10,1,1,'#fff');R(x,X+9,Y+3,3,3,'#fde68a');R(x,X+4,Y+10,3,3,'#6ee7b7')}
+  }
+  // pond rim
+  x.strokeStyle='#1e1b4b';x.lineWidth=2;x.strokeRect(6*TS,7*TS,3*TS,3*TS);
+  // trees
+  for(let ty=0;ty<MH;ty++)for(let tx=0;tx<MW;tx++)if(map[ty][tx]==='T'){const X=tx*TS,Y=ty*TS;
+    R(x,X+6,Y+11,4,5,'#3b0764');circ(x,X+8,Y+7,6,'#065f46');circ(x,X+7,Y+6,5,'#059669');R(x,X+4,Y+4,2,2,'#34d399');R(x,X+10,Y+7,1,1,'#34d399')}
+  // lamps
+  [[3,10],[20,10],[10,17],[13,17],[3,17],[20,17]].forEach(([tx,ty])=>{const X=tx*TS+12,Y=ty*TS+2;R(x,X,Y+4,2,10,'#1e1b4b');R(x,X-1,Y,4,4,'#fde68a')});
+})();
+
+/* ================= GAME STATE ================= */
+const P={jump:0,say:'',sayT:0,path:null,x:11.5*TS,y:13*TS,face:1,moving:false,tgt:null,auto:null,stuck:0,walkT:0,steps:0};
+const keys={u:0,d:0,l:0,r:0};let fans=[],parts=[],coins=0,fanCount=0,pieces=0,myTheater=null,startTime=0,nearZone=null,tutHidden=false,gameRunning=false;
+const LOG={theater:'',potion:'',hires:[],reactions:0};
+
+function buildLetters(){ $('#letters').innerHTML=AX.map((a,i)=>`<div class="lt" id="lt${i}"><i><b>?</b><em>${LETTERS[i]||'?'}</em></i></div>`).join('');
+  $('#meter').innerHTML=AX.map((a,i)=>`<div id="mt${i}">${ZI[a.zone]} ${a.a}/${a.b}<br>${a.an.split('·')[0]}·${a.bn.split('·')[0]}</div>`).join('')}
+buildLetters();
+
+/* camera + render */
+const cv=$('#cv'),X=cx2(cv);let cam={x:0,y:0},T=0;
+function drawZone(z){const x=X,ox=z.px-cam.x,oy=z.py-cam.y,w=z.pw,h=z.ph;
+  // shadow
+  R(x,ox+4,oy+h-2,w,6,'rgba(0,0,0,.25)');
+  if(z.id===0&&myTheater){drawMyTheater(ox,oy,w,h);return}
+  R(x,ox+4,oy+20,w-8,h-20,z.wall);R(x,ox+4,oy+h-4,w-8,4,'rgba(0,0,0,.15)');
+  // roof
+  for(let i=0;i<14;i++)R(x,ox+i,oy+20-i,w-i*2,1,i%3===0?shade(z.roof):z.roof);R(x,ox,oy+20,w,3,shade(z.roof));
+  // windows
+  for(let i=0;i<2;i++){const wx=ox+12+i*(w-36);R(x,wx,oy+30,12,10,'#140726');R(x,wx+1,oy+31,10,8,(T>>5)%4===i?'#fef3c7':'#fde68a');R(x,wx+6,oy+31,1,8,'#140726')}
+  // door
+  R(x,ox+w/2-7,oy+h-22,14,22,'#140726');R(x,ox+w/2-6,oy+h-21,12,21,z.done?'#a3e635':'#5b21b6');R(x,ox+w/2+3,oy+h-11,2,2,'#fde68a');
+  // sign
+  R(x,ox+w/2-14,oy+6,28,10,'#140726');R(x,ox+w/2-13,oy+7,26,8,'#fffaf2');
+  x.font='8px sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(z.icon,ox+w/2,oy+11);
+  // done flag
+  if(z.done){R(x,ox+w-10,oy-14,2,20,'#140726');R(x,ox+w-8,oy-14,10,7,'#a3e635')}
+  else{const b=Math.round(Math.sin(T/8)*3);R(x,ox+w/2-4,oy-22+b,8,12,'#140726');R(x,ox+w/2-3,oy-21+b,6,10,'#fcd34d');R(x,ox+w/2-1,oy-19+b,2,4,'#140726');R(x,ox+w/2-1,oy-14+b,2,2,'#140726')}}
+function shade(h){return rgb2hex(hex2rgb(h).map(v=>v*.72))}
+function drawMyTheater(ox,oy,w,h){const x=X,big=myTheater.big;
+  if(big){R(x,ox,oy+10,w,h-10,'#7c3aed');for(let i=0;i<5;i++)R(x,ox+6+i*15,oy+14,4,h-14,'#ddd6fe');R(x,ox-2,oy+4,w+4,8,'#fbbf24');
+    for(let i=0;i<w;i+=6)R(x,ox+i,oy+6,3,3,(i/6+(T>>3))%2?'#fff':'#f472b6');R(x,ox+w/2-12,oy-6,24,10,'#fbbf24');R(x,ox+w/2-10,oy-4,20,6,'#7c3aed')}
+  else{R(x,ox+8,oy+16,w-16,h-16,'#34d399');R(x,ox+4,oy+10,w-8,8,'#047857');for(let i=0;i<w-8;i+=8)R(x,ox+4+i,oy+18,4,3,'#fff');
+    R(x,ox+14,oy+28,10,8,'#fde68a');R(x,ox+w-24,oy+28,10,8,'#fde68a')}
+  R(x,ox+w/2-7,oy+h-22,14,22,'#140726');R(x,ox+w/2-6,oy+h-21,12,21,'#a3e635');
+  x.fillStyle='#140726';R(x,ox+w/2-26,oy+h-36,52,10,'#140726');x.font='bold 8px sans-serif';x.fillStyle='#fde68a';x.textAlign='center';x.textBaseline='middle';
+  x.fillText(myTheater.name.slice(0,8),ox+w/2,oy+h-31)}
+function drawGate(){const x=X,ox=GATE.px-cam.x,oy=GATE.py-cam.y,w=GATE.pw,h=GATE.ph,open=pieces>=4;
+  R(x,ox+4,oy+h-2,w,6,'rgba(0,0,0,.3)');R(x,ox+4,oy+18,w-8,h-18,'#4c1d95');
+  for(let i=0;i<5;i++)R(x,ox+10+i*17,oy+22,5,h-22,'#6d28d9');
+  R(x,ox,oy+8,w,12,'#7c3aed');for(let i=0;i<w;i+=5)R(x,ox+i+1,oy+10,3,3,(i/5+(T>>3))%2?'#fde68a':'#f472b6');
+  R(x,ox+w/2-22,oy-6,44,14,'#fbbf24');R(x,ox+w/2-20,oy-4,40,10,'#140726');x.font='bold 7px sans-serif';x.fillStyle=open?'#d9f99d':'#c4b5fd';x.textAlign='center';x.textBaseline='middle';
+  x.fillText(open?'OPEN!':'TICKET '+pieces+'/4',ox+w/2,oy+1);
+  R(x,ox+w/2-12,oy+h-28,24,28,'#140726');R(x,ox+w/2-11,oy+h-27,22,27,open?'#fcd34d':'#2e1065');
+  if(!open){R(x,ox+w/2-4,oy+h-18,8,7,'#a8a29e');R(x,ox+w/2-3,oy+h-22,6,4,'#78716c');R(x,ox+w/2-2,oy+h-21,4,3,'#2e1065')}
+  else{for(let i=0;i<3;i++){const a=T/10+i*2.1;R(x,ox+w/2+Math.cos(a)*16|0,oy+h-14+Math.sin(a)*8|0,2,2,'#fff')}}}
+function render(){T++;X.clearRect(0,0,VW,VH);
+  cam.x=Math.max(0,Math.min(MW*TS-VW,P.x-VW/2));cam.y=Math.max(0,Math.min(MH*TS-VH,P.y-VH/2-10));cam.x|=0;cam.y|=0;
+  X.drawImage(BG,-cam.x,-cam.y);
+  // pond shimmer
+  for(let i=0;i<4;i++){const px=6*TS+6+((T/2+i*13)%38),py=7*TS+8+i*9;R(X,(px-cam.x)|0,(py-cam.y)|0,3,1,'#818cf8')}
+  ZONES.forEach(drawZone);drawGate();
+  // coins
+  COINS.forEach(c=>{if(c.got)return;const b=Math.round(Math.sin(T/8+c.ph)*2),w=[6,4,2,4][(T>>3)%4];const cx=(c.x-cam.x)|0,cy=(c.y-cam.y+b)|0;
+    R(X,cx-3,cy+5-b,6,2,'rgba(0,0,0,.25)');R(X,cx-w/2-1,cy-4,w+2,8,'#140726');R(X,cx-w/2,cy-3,w,6,'#fcd34d');if(w>2)R(X,cx-w/2+1,cy-2,1,2,'#fff')});
+  // sprites sorted by y
+  const spr=[...fans.map(f=>({y:f.y,d:()=>drawTiny(f)})),{y:P.y,d:drawPlayer}];spr.sort((a,b)=>a.y-b.y).forEach(s=>s.d());
+  // particles
+  parts=parts.filter(p=>(p.l-->0));parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=p.g||0;R(X,(p.x-cam.x)|0,(p.y-cam.y)|0,p.s,p.s,p.c)});
+  // tap target marker
+  if(P.tgt){const tx=(P.tgt.x-cam.x)|0,ty=(P.tgt.y-cam.y)|0,s=(T>>2)%2;R(X,tx-3-s,ty,2,1,'#d9f99d');R(X,tx+2+s,ty,2,1,'#d9f99d');R(X,tx,ty-3-s,1,2,'#d9f99d');R(X,tx,ty+2+s,1,2,'#d9f99d')}
+  // night vignette
+  const g=X.createRadialGradient(P.x-cam.x,P.y-cam.y,40,P.x-cam.x,P.y-cam.y,190);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(10,4,24,.45)');X.fillStyle=g;X.fillRect(0,0,VW,VH)}
+function drawPlayer(){const px=(P.x-cam.x)|0,py=(P.y-cam.y)|0;const walk=P.moving&&((P.walkT>>3)%2);const sq=P.moving?Math.abs(Math.sin(P.walkT/4)):0;
+  const jo=P.jump>0?Math.round(Math.sin((24-P.jump)/24*Math.PI)*14):0;
+  R(X,px-5+Math.round(jo/6),py+1,10-Math.round(jo/3),3,'rgba(0,0,0,.3)');grid(X,(T%150<5||P.jump>0)?TKB:(walk?TK2:TK),BASEPAL,px-6,py-11-Math.round(sq*2)-jo,P.face<0);
+  if(P.sayT>0){X.font='bold 9px Jua, sans-serif';const w=Math.ceil(X.measureText(P.say).width)+8,bx=px-w/2|0,by=py-30-jo;
+    R(X,bx-1,by-1,w+2,14,'#140726');R(X,bx,by,w,12,'#fff');R(X,px-1,by+12,3,2,'#140726');X.fillStyle='#140726';X.textAlign='center';X.textBaseline='middle';X.fillText(P.say,px,by+6.5)}}
+function drawTiny(f){const px=(f.x-cam.x)|0,py=(f.y-cam.y)|0;R(X,px-4,py+1,8,2,'rgba(0,0,0,.25)');
+  const c=f.c;R(X,px-4,py-8,8,8,'#140726');R(X,px-3,py-7,6,6,c);R(X,px-2,py-5,1,1,'#140726');R(X,px+1,py-5,1,1,'#140726');if((f.t>>3)%2)R(X,px-3,py,2,1,'#140726');else R(X,px+1,py,2,1,'#140726');
+  if(f.h>0){f.h--;R(X,px-1,py-14,3,3,'#f472b6')}}
+
+/* update */
+let lastStep=0;
+function update(){if(P.jump>0)P.jump--;if(P.sayT>0)P.sayT--;if(!gameRunning)return;let dx=(keys.r-keys.l),dy=(keys.d-keys.u);
+  if(dx||dy){P.tgt=null;P.auto=null;P.path=null}
+  else if(P.path&&P.path.length){const w=P.path[0],vx=w.x-P.x,vy=w.y-P.y,d=Math.hypot(vx,vy);if(d<2){P.path.shift();if(!P.path.length){P.path=null;P.tgt=null;if(P.auto!=null){const z=P.auto;P.auto=null;tryEnter(z)}}}else{dx=vx/d;dy=vy/d}}
+  const sp=1.6;P.moving=!!(dx||dy);
+  if(P.moving){const l=Math.hypot(dx,dy);dx=dx/l*sp;dy=dy/l*sp;if(dx)P.face=dx<0?-1:1;let mv=false;
+    if(!blocked(P.x+dx,P.y)){P.x+=dx;mv=true}if(!blocked(P.x,P.y+dy)){P.y+=dy;mv=true}
+    // slide assist for tap targets
+    if(!mv&&P.path){P.stuck++;if(P.stuck>25){P.path=null;P.tgt=null;P.stuck=0}}else P.stuck=0;
+    P.walkT++;if(P.walkT%10===0){SFX.step();P.steps++;parts.push({x:P.x-P.face*4,y:P.y+1,vx:-P.face*.2,vy:-.2,s:2,c:'#a78bfa',l:12})}
+    if(!tutHidden&&P.steps>6){tutHidden=true;$('#tut').style.opacity=0;setTimeout(()=>$('#tut').style.display='none',400)}}
+  // coins
+  COINS.forEach(c=>{if(!c.got&&Math.hypot(c.x-P.x,c.y-(P.y-6))<12){c.got=true;coins++;$('#coinN').textContent=coins;bump('#coinChip');SFX.coin();
+    for(let i=0;i<10;i++)parts.push({x:c.x,y:c.y,vx:(Math.random()-.5)*2.4,vy:-Math.random()*2.2,g:.12,s:2,c:i%2?'#fcd34d':'#fff',l:28});
+    toast(`🪙 코인 획득! 극장 예산 +50 (${coins}/8)`,1300)}});
+  // fans wander
+  fans.forEach(f=>{f.t++;if(f.t%60===0||!f.v){const a=Math.random()*6.28;f.v=[Math.cos(a)*.5,Math.sin(a)*.5]}
+    if(!blocked(f.x+f.v[0],f.y))f.x+=f.v[0];else f.v[0]*=-1;if(!blocked(f.x,f.y+f.v[1]))f.y+=f.v[1];else f.v[1]*=-1;
+    if(Math.hypot(f.x-P.x,f.y-P.y)<14&&f.h<=0){f.h=40;if(Math.random()<.3)SFX.fan()}});
+  // near zones
+  let nz=null;[...ZONES,{gate:true,dx:GATE.dx,dy:GATE.dy}].forEach(z=>{if(Math.hypot(z.dx-P.x,z.dy-P.y)<20)nz=z});
+  if(nz!==nearZone){nearZone=nz;const tip=$('#zoneTip'),ab=$('#abtn');
+    if(nz){tip.textContent=nz.gate?(pieces>=4?'✨ 골든 티켓 극장 — A로 입장!':`🔒 티켓 조각 ${pieces}/4 · 모두 모아야 열려요`):(nz.done?`✓ ${nz.name} 클리어!`:`${nz.icon} ${nz.name} — A로 입장`);
+      tip.classList.add('on');ab.classList.toggle('glow',nz.gate?pieces>=4:!nz.done)}
+    else{tip.classList.remove('on');ab.classList.remove('glow')}}}
+function loop(){update();render();requestAnimationFrame(loop)}
+function bump(s){const e=$(s);e.classList.remove('bump');void e.offsetWidth;e.classList.add('bump')}
+
+/* input */
+const KM={ArrowUp:'u',KeyW:'u',ArrowDown:'d',KeyS:'d',ArrowLeft:'l',KeyA:'l',ArrowRight:'r',KeyD:'r'};
+addEventListener('keydown',e=>{if(!gameRunning||$('#mg').classList.contains('on'))return;if(KM[e.code]){keys[KM[e.code]]=1;e.preventDefault()}
+  if(e.code==='Space'||e.code==='Enter'){e.preventDefault();pressA()}});
+addEventListener('keyup',e=>{if(KM[e.code])keys[KM[e.code]]=0});
+$$('#dpad button').forEach(b=>{const d=b.dataset.d;const on=e=>{e.preventDefault();keys[d]=1;b.classList.add('hold');try{b.setPointerCapture(e.pointerId)}catch(_){}},off=()=>{keys[d]=0;b.classList.remove('hold')};
+  b.addEventListener('pointerdown',on);b.addEventListener('pointerup',off);b.addEventListener('pointercancel',off);b.addEventListener('pointerleave',off)});
+cv.addEventListener('pointerdown',e=>{if(!gameRunning)return;const r=cv.getBoundingClientRect();const wx=(e.clientX-r.left)/r.width*VW+cam.x,wy=(e.clientY-r.top)/r.height*VH+cam.y;
+  if(Math.abs(wx-P.x)<11&&wy>P.y-17&&wy<P.y+4){tickle();return}
+  let auto=null;ZONES.forEach(z=>{if(wx>z.px&&wx<z.px+z.pw&&wy>z.py-24&&wy<z.py+z.ph+12)auto=z});
+  if(wx>GATE.px&&wx<GATE.px+GATE.pw&&wy>GATE.py-10&&wy<GATE.py+GATE.ph+12)auto={gate:true,dx:GATE.dx,dy:GATE.dy};
+  const goal=auto?{x:auto.dx,y:auto.dy+2}:{x:wx,y:wy};const path=findPath(goal.x,goal.y);
+  if(!path){toast('그곳으론 갈 수 없어요 🌳',1000);SFX.bad();return}
+  P.path=path;P.tgt=path.length?path[path.length-1]:goal;P.auto=auto;if(!path.length&&auto){P.path=null;P.tgt=null;P.auto=null;tryEnter(auto)}SFX.pop()});
+$('#abtn').onclick=pressA;
+function tickle(txt){if(P.jump>0)return;P.jump=24;P.say=txt||SAYS[Math.random()*SAYS.length|0];P.sayT=70;laugh();
+  for(let i=0;i<8;i++)parts.push({x:P.x,y:P.y-10,vx:(Math.random()-.5)*2.4,vy:-Math.random()*2-0.5,g:.08,s:2,c:i%2?'#f9a8d4':'#d9f99d',l:34})}
+function pressA(){if(nearZone)tryEnter(nearZone);else tickle()}
+function tryEnter(z){keys.u=keys.d=keys.l=keys.r=0;$$('#dpad button').forEach(b=>b.classList.remove('hold'));
+  if(z.gate){if(pieces>=4)finale();else{toast(`🔒 티켓 조각이 ${4-pieces}개 더 필요해요`);SFX.bad()}return}
+  if(z.done){toast(`✓ 이미 클리어한 곳이에요`,1200);return}SFX.door();openMG(z.id)}
+
+/* ================= MINIGAMES ================= */
+const mg=$('#mg'),box=$('#mgbox');
+function openMG(id){if(!tutHidden){tutHidden=true;$('#tut').style.display='none'}mg.classList.add('on');gameRunning=false;bgmPlay('mini');[mgBuild,mgAudition,mgPotion,mgReaction][id]()}
+function closeMG(){mg.classList.remove('on');gameRunning=true;bgmPlay('town')}
+function head(tag,title,desc,closable=true){return `<div class="mgtop"><span class="tag">${tag}</span><h3>${title}</h3>${closable?'<button class="x" onclick="closeMG()">✕</button>':''}</div><p class="mgdesc">${desc}</p>`}
+
+/* --- 1. Tycoon build --- */
+const ITEMS=[
+ {id:'chand',n:'황금 샹들리에',s:'객석 위로 떨어질 듯한',c:300,l:{N:2},aud:400,ic:'chand'},
+ {id:'spin',n:'회전 무대',s:'장면이 마법처럼 휙휙',c:300,l:{N:2},aud:350,ic:'spin'},
+ {id:'fly',n:'플라잉 와이어',s:'배우가 하늘을 난다',c:300,l:{N:2},aud:380,ic:'fly'},
+ {id:'led',n:'대형 LED 월',s:'환상적인 영상 연출',c:250,l:{N:2},aud:300,ic:'led'},
+ {id:'pit',n:'오케스트라 피트',s:'라이브 30인조',c:250,l:{N:1},aud:250,ic:'pit'},
+ {id:'alley',n:'리얼 골목길 세트',s:'진짜 동네 같은 무대',c:200,l:{S:2},aud:150,ic:'alley'},
+ {id:'cozy',n:'아늑한 150석',s:'모두가 VIP석',c:200,l:{S:2},aud:150,ic:'cozy'},
+ {id:'box',n:'블랙박스 무대',s:'꾸밈 없이 배우에 집중',c:200,l:{S:2},aud:120,ic:'box'},
+ {id:'front',n:'무대 밀착 1열',s:'배우와 눈맞춤',c:150,l:{S:2},aud:80,ic:'front'},
+ {id:'book',n:'북카페 로비',s:'대본집과 커피 한 잔',c:150,l:{S:1},aud:90,ic:'book'}];
+function mgBuild(){const budget=1000+coins*50;let sel=[];
+  box.innerHTML=head('ZONE 1 · TYCOON','🏗️ 나만의 극장 짓기',`환상적인 스펙터클일까, 현실 같은 생생함일까? 예산 안에서 끌리는 시설을 3개 이상 골라 극장을 지어보세요. 모아온 코인 ${coins}개로 예산이 <b>+${coins*50}</b> 늘었어요!`)+
+  `<div class="tyc"><canvas class="px" id="tycCv" width="120" height="72"></canvas></div>
+   <div class="tycstat"><div>남은 예산<b id="bLeft">${budget}</b><div class="budget"><i id="bBar" style="width:100%"></i></div></div><div>예상 관객 수<b id="bAud">0명</b></div></div>
+   <div class="items" id="items"></div>
+   <input class="namein" id="tname" maxlength="8" placeholder="극장 이름 (예: 보라 극장)" value="">
+   <button class="btn pu" id="openBtn" disabled>🎉 극장 개관하기 (0/3)</button>`;
+  const wrap=$('#items');ITEMS.forEach(it=>{const b=document.createElement('button');b.className='item';b.dataset.id=it.id;b.appendChild(ic(it.ic,1));
+    b.insertAdjacentHTML('beforeend',`<span>${it.n}<small>${it.s}</small><span class="cost">₩${it.c}</span></span>`);b.onclick=()=>toggle(it,b);wrap.appendChild(b)});
+  const tc=$('#tycCv'),tx=cx2(tc);let tt=0,raf;
+  function drawT(){tt++;R(tx,0,0,120,72,'#1a0b33');
+    const big=sel.reduce((a,i)=>a+(i.l.N||0),0)>=sel.reduce((a,i)=>a+(i.l.S||0),0)&&sel.length>0;const has=id=>sel.some(i=>i.id===id);
+    const W=has('seats')?110:big?96:70,H=has('seats')?62:big?56:46,ox=(120-W)/2,oy=72-H;
+    R(tx,ox,oy,W,H,'#2e1065');
+    // stage
+    const sw=has('box')?W*.6:W*.75;R(tx,60-sw/2,oy+8,sw,20,has('box')?'#111':'#7c2d12');R(tx,60-sw/2,oy+26,sw,3,'#140726');
+    if(!has('box')){for(let i=0;i<6;i++){R(tx,60-sw/2+i,oy+8,1,20,'#b91c1c');R(tx,60+sw/2-1-i,oy+8,1,20,'#b91c1c')}}
+    if(has('spin')){const a=tt/12;for(let i=0;i<8;i++){const ang=a+i*.785;R(tx,60+Math.cos(ang)*14|0,oy+18+Math.sin(ang)*4|0,2,2,'#fbbf24')}}
+    if(has('led')){for(let i=0;i<10;i++)R(tx,60-sw/2+4+i*(sw-8)/10,oy+10,(sw-8)/10-1,4,['#f472b6','#60a5fa','#a3e635','#fde68a'][(i+(tt>>3))%4])}
+    if(has('chand')){R(tx,59,oy-2,2,6,'#fbbf24');R(tx,52,oy+3,16,2,'#fbbf24');for(let i=0;i<5;i++)R(tx,53+i*3,oy+5,1,2,(tt>>2)%2?'#fff':'#fde68a')}
+    if(has('pit')){R(tx,60-sw/2+6,oy+30,sw-12,5,'#140726');for(let i=0;i<5;i++)R(tx,60-sw/2+10+i*((sw-20)/5),oy+31+((tt>>3)+i)%2,2,2,'#e5e7eb')}
+    // seats
+    const rows=has('seats')?6:big?4:2,cols=has('seats')?18:big?14:8;for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){const sx=60-cols*2.5+c*5,sy=oy+37+r*4;if(sy<70)R(tx,sx,sy,3,2,has('cozy')&&r<2?'#f472b6':'#9f1239')}
+    if(has('front'))for(let c=0;c<6;c++)R(tx,46+c*5,oy+33,3,2,'#a3e635');
+    if(has('fly')){const fy=oy+4+Math.round(Math.sin(tt/10)*3);R(tx,70,oy,1,fy-oy,'#e5e7eb');R(tx,68,fy,4,5,'#f472b6');R(tx,69,fy-2,2,2,'#fde2c8')}
+    if(has('alley')){for(let i=0;i<4;i++){const hx=60-sw/2+4+i*(sw-8)/4;R(tx,hx,oy+12,(sw-8)/4-2,14,['#fde68a','#93c5fd','#fca5a5','#a7f3d0'][i]);R(tx,hx+2,oy+15,3,3,(tt>>4)%4===i?'#fff':'#140726')}}
+    if(has('book')){R(tx,4,52,14,18,'#78350f');for(let i=0;i<3;i++)R(tx,6,54+i*5,10,3,['#f43f5e','#3b82f6','#22c55e'][i])}
+    // marquee
+    for(let i=0;i<W;i+=4)R(tx,ox+i,oy,2,2,(i/4+(tt>>3))%2?'#fde68a':'#f472b6');
+    raf=requestAnimationFrame(drawT)}drawT();
+  function upd(){const spent=sel.reduce((a,i)=>a+i.c,0),left=budget-spent;$('#bLeft').textContent=left;$('#bBar').style.width=(left/budget*100)+'%';
+    $('#bAud').textContent=sel.reduce((a,i)=>a+i.aud,0).toLocaleString()+'명';
+    $$('.item').forEach(b=>{const it=ITEMS.find(i=>i.id===b.dataset.id);b.classList.toggle('no',!sel.includes(it)&&it.c>left)});
+    const ob=$('#openBtn');ob.disabled=sel.length<3;ob.textContent=sel.length<3?`🎉 극장 개관하기 (${sel.length}/3)`:'🎉 극장 개관하기!'}
+  function toggle(it,b){const i=sel.indexOf(it),left=budget-sel.reduce((a,x)=>a+x.c,0);
+    if(i>=0){sel.splice(i,1);b.classList.remove('sel');SFX.pop()}else{if(it.c>left){toast('💸 예산이 부족해요! 다른 시설을 빼보세요',1500);SFX.bad();return}sel.push(it);b.classList.add('sel');SFX.sel()}upd()}
+  upd();
+  $('#openBtn').onclick=()=>{cancelAnimationFrame(raf);let g=0,c=0;sel.forEach(i=>{g+=i.l.N||0;c+=i.l.S||0});if(g===c)(sel[0].l.N?g++:c++);SC.N+=g;SC.S+=c;
+    const name=($('#tname').value.trim()||'틱키 극장');const aud=sel.reduce((a,i)=>a+i.aud,0);myTheater={name,big:g>c,aud};LOG.theater=name;
+    finishZone(0,g>c?'N':'S',{title:`${name} 개관!`,big:aud.toLocaleString()+'명',text:g>c?'마법 같은 스펙터클 극장을 지은 <b>N 상상파</b>! 판타지와 상징, 무대 위 환상에 끌리는 타입이에요.':'생생한 현실 무대를 지은 <b>S 현실파</b>! 공감 가는 이야기와 배우의 숨결을 사랑하는 타입이에요.',fans:Math.min(4,Math.ceil(aud/400))})}}
+
+/* --- 2. Audition --- */
+const AUD=[
+ [{n:'파워 고음 발라드',d:'객석을 울리는 3옥타브 고음',l:'M',fx:['♪','♫','🎵'],bub:'♪ 나의 노래를~',h:'#fbbf24',c:'#ec4899'},{n:'눈물의 독백 연기',d:'숨죽이게 만드는 3분 독백',l:'T',fx:['💧','…'],bub:'"그날 밤, 나는…"',h:'#1f2937',c:'#64748b'}],
+ [{n:'신나는 탭댄스 넘버',d:'발끝으로 만드는 리듬',l:'M',fx:['♪','👞','✨'],bub:'♫ 탁탁 탁탁!',h:'#7c2d12',c:'#22c55e'},{n:'슬랩스틱 콩트',d:'몸 개그 대폭발 2인극',l:'T',fx:['💥','😂'],bub:'"아이고 내 허리!"',h:'#f59e0b',c:'#f97316'}],
+ [{n:'오케스트라 서곡',d:'막이 오르기 전의 전율',l:'M',fx:['🎻','♪','♫'],bub:'♪~♬~♪',h:'#e5e7eb',c:'#1f2937'},{n:'셰익스피어 낭독',d:'한 줄 한 줄 곱씹는 대사',l:'T',fx:['📜','🌹'],bub:'"사느냐 죽느냐…"',h:'#78350f',c:'#7c3aed'}],
+ [{n:'록 밴드 떼창',d:'관객과 함께 부르는 후렴',l:'M',fx:['🎸','🤘','♪'],bub:'♫ 다 같이~!',h:'#111827',c:'#ef4444'},{n:'관객과 즉흥 대화',d:'매일 달라지는 애드리브',l:'T',fx:['💬','❓'],bub:'"거기 1열 분!"',h:'#a855f7',c:'#0ea5e9'}],
+ [{n:'로맨틱 듀엣 넘버',d:'두 목소리가 겹쳐지는 순간',l:'M',fx:['💕','♪'],bub:'♪ 너와 나~',h:'#fbcfe8',c:'#db2777'},{n:'2인극 밀당 대사',d:'티키타카 말맛 대결',l:'T',fx:['⚡','💬'],bub:'"아니 그게 아니라!"',h:'#422006',c:'#0d9488'}]];
+function mgAudition(){let r=0,m=0,t=0;
+  function round(){const pair=AUD[r].slice();if(Math.random()<.5)pair.reverse();
+    box.innerHTML=head('ZONE 2 · AUDITION','🎤 별빛 오디션 심사',`당신은 오늘의 심사위원! 노래로 마음을 울리는 배우와 대사·연기로 사로잡는 배우 중, 우리 극장에 세우고 싶은 쪽에 <b>합격</b> 도장을 찍어주세요.`)+
+    `<div class="prog">${AUD.map((_,i)=>`<i class="${i<r?'f':''}"></i>`).join('')}</div><div class="auds" id="auds"></div>
+     <p style="text-align:center;font-family:Jua;font-size:13px;color:#6b5a86;margin-top:10px">ROUND ${r+1} / 5 · 카드를 탭해서 합격!</p>`;
+    pair.forEach(p=>{const d=document.createElement('div');d.className='aud';d.innerHTML=`<div class="st"><div class="bub">${p.bub}</div></div><h4>${p.n}</h4><p>${p.d}</p><div class="pass"><span>합격!</span></div>`;
+      const st=d.querySelector('.st');st.appendChild(personCanvas(p.h,p.c,'#312e81'));
+      p.fx.forEach((f,i)=>{for(let k=0;k<2;k++){const s=document.createElement('span');s.className='fx';s.textContent=f;s.style.left=(10+Math.random()*70)+'%';s.style.bottom='10px';s.style.animationDelay=(i*.5+k*.8)+'s';st.appendChild(s)}});
+      tilt(d);d.onclick=()=>{if(d.dataset.done)return;$$('.aud').forEach(a=>{a.dataset.done=1;a.classList.add(a===d?'win':'lose')});SFX.ok();
+        if(p.l==='M')m++;else t++;LOG.hires.push(p.n);setTimeout(()=>{r++;r<5?round():done()},850)};$('#auds').appendChild(d)})}
+  function done(){SC.F+=m;SC.T+=t;finishZone(1,m>t?'F':'T',{title:'오디션 종료!',big:`🎵${m} : 💬${t}`,text:m>t?'노래가 흐를 때 심장이 뛰는 <b>F 감성·음악파</b>! 넘버와 감정선이 좋은 작품이 잘 맞아요.':'대사 한 줄과 치밀한 구성에 끌리는 <b>T 대사·구조파</b>! 연극, 추리극, 풍자극이 잘 맞아요.',fans:2})}
+  round()}
+
+/* --- 3. Potion --- */
+const ING=[{n:'예매 알람 시계',ic:'clock',l:'J',col:'#3b82f6'},{n:'시놉시스 두루마리',ic:'scroll',l:'J',col:'#a78bfa'},{n:'검증된 명작 별',ic:'star8',l:'J',col:'#6366f1'},
+           {n:'즉흥 주사위',ic:'dice',l:'P',col:'#f97316'},{n:'당일 번개 티켓',ic:'bolt',l:'P',col:'#fde047'},{n:'호기심 깃털',ic:'feather',l:'P',col:'#4ade80'}];
+function mgPotion(){let drops=[],liquid=hex2rgb('#5b21b6'),tt=0,raf,splash=0;
+  box.innerHTML=head('ZONE 3 · ALCHEMY','🧪 관람 스타일 포션 공방','나는 공연을 어떻게 고르고 즐길까? 끌리는 재료를 <b>5번</b> 넣어 나만의 관람 포션을 만드세요. 같은 재료를 여러 번 넣어도 돼요!')+
+   `<div class="pot"><canvas class="px" id="potCv" width="80" height="64"></canvas></div><div class="drops" id="drops">${'<i></i>'.repeat(5)}</div><div class="ings" id="ings"></div><div id="potEnd"></div>`;
+  ING.forEach(g=>{const b=document.createElement('button');b.className='ing';const c=ic(g.ic,1);b.appendChild(c);b.insertAdjacentHTML('beforeend',g.n);b.onclick=e=>add(g,c);$('#ings').appendChild(b)});
+  const pc=$('#potCv'),px=cx2(pc);const bubbles=[];
+  function draw(){tt++;R(px,0,0,80,64,'#fffaf2');
+    // fire
+    for(let i=0;i<6;i++){const h=4+((tt>>2)+i*3)%5;R(px,22+i*6,60-h,4,h,i%2?'#f97316':'#fbbf24')}
+    // cauldron
+    circ(px,40,38,20,'#140726');circ(px,40,38,18,'#374151');R(px,18,14,44,9,'#fffaf2');R(px,16,19,48,5,'#140726');R(px,17,20,46,3,'#4b5563');
+    const lc=rgb2hex(liquid);R(px,19,24,42,5,lc);R(px,21,29,38,4,lc);R(px,24,33,32,3,lc);for(let i=0;i<40;i+=4)R(px,20+i,24+((tt>>3)+i/4)%2,3,1,rgb2hex(liquid.map(v=>Math.min(255,v+50))));
+    if(tt%10===0)bubbles.push({x:24+Math.random()*32,y:26,l:30});bubbles.forEach(b=>{b.y-=.5;b.l--;R(px,b.x|0,b.y|0,2,2,rgb2hex(liquid.map(v=>Math.min(255,v+70))))});
+    while(bubbles.length&&bubbles[0].l<=0)bubbles.shift();
+    if(splash>0){splash--;for(let i=0;i<6;i++)R(px,40+Math.cos(i)*splash*.8|0,22-Math.abs(Math.sin(i*2))*splash*.6|0,2,2,lc)}
+    raf=requestAnimationFrame(draw)}draw();
+  function add(g,c){if(drops.length>=5)return;drops.push(g);SFX.pop();
+    // fly animation
+    const r1=c.getBoundingClientRect(),r2=pc.getBoundingClientRect();const f=c.cloneNode();f.className='flyer px';cx2(f).drawImage(c,0,0);document.body.appendChild(f);
+    f.animate([{left:r1.left+'px',top:r1.top+'px',transform:'scale(1) rotate(0)'},{left:(r1.left+r2.left+r2.width/2)/2+'px',top:(r2.top-60)+'px',transform:'scale(1.3) rotate(180deg)',offset:.5},{left:(r2.left+r2.width/2-17)+'px',top:(r2.top+r2.height*.3)+'px',transform:'scale(.4) rotate(360deg)'}],{duration:600,easing:'ease-in'}).onfinish=()=>{f.remove();
+      const add=hex2rgb(g.col);liquid=liquid.map((v,i)=>v*.5+add[i]*.5);splash=10;tone(300+drops.length*80,.12,'sine',.06,1.8);
+      const d=$('#drops').children[drops.length-1];d.classList.add('f');d.style.background=g.col;if(drops.length===5)finish()}}
+  function finish(){const e=drops.filter(d=>d.l==='J').length,fN=5-e;$$('.ing').forEach(b=>b.disabled=true);
+    const name=e>=4?'철두철미 플래너 엘릭서':e===3?'계획형 설렘 포션':fN===3?'그날그날 기분 포션':'즉흥 번개 포션';LOG.potion=name;
+    $('#potEnd').innerHTML=`<div class="potname">✨ ${name} ✨</div><button class="btn pu" id="drink">🥤 꿀꺽! 마셔보기</button>`;SFX.ok();
+    $('#drink').onclick=()=>{cancelAnimationFrame(raf);flash(rgb2hex(liquid));SC.J+=e;SC.P+=fN;
+      finishZone(2,e>fN?'J':'P',{title:name,big:`📅${e} : 🎲${fN}`,text:e>fN?'예매 오픈 알람은 기본! <b>J 계획파</b>. 검증된 명작과 미리 예습한 공연에서 만족도가 높아요.':'그날의 기분 따라 고르는 <b>P 즉흥파</b>! 당일 관람, 오픈런, 새로운 실험작에 끌려요.',fans:2})}}}
+function flash(col){const d=document.createElement('div');d.style.cssText=`position:fixed;inset:0;background:${col};z-index:85;pointer-events:none`;document.body.appendChild(d);
+  d.animate([{opacity:.85},{opacity:0}],{duration:700}).onfinish=()=>d.remove()}
+
+/* --- 4. Reaction --- */
+const RQ=[{q:'배우가 객석으로 손을 내밀었다!',a:'🙋 손 잡으러 간다',w:'🙂 미소로 지켜본다',sc:'hand'},
+ {q:'커튼콜! 대표 넘버가 다시 흘러나온다',a:'📣 일어나서 떼창',w:'👏 박수로 감상',sc:'curtain'},
+ {q:'복도에서 의문의 쪽지를 발견했다',a:'🔍 단서를 따라간다',w:'🎫 자리로 돌아간다',sc:'note'},
+ {q:'배우가 "1열 분, 이름이 뭐예요?"',a:'🙌 크게 대답한다',w:'😳 조용히 웃는다',sc:'ask'},
+ {q:'공연 후 로비에서 관객 이벤트 시작!',a:'📸 포토타임 참여',w:'📖 프로그램북 정독',sc:'lobby'}];
+function mgReaction(){let r=0,a=0,w=0,timer=null,raf,tt=0;
+  box.innerHTML=head('ZONE 4 · QUICK TIME','⚡ 리액션 스테이지','공연 중 돌발 상황! <b>4초 안에</b> 본능적으로 반응하세요. 시간이 지나면 조용히 지켜본 걸로 할게요.',false)+
+   `<div class="prog" id="rprog">${RQ.map(()=>'<i></i>').join('')}</div><div class="rscene"><canvas class="px" id="rCv" width="160" height="90"></canvas></div>
+    <div class="rq" id="rq"></div><div class="timer"><i id="rt"></i></div><div class="rbtns"><button class="btn" id="ra"></button><button class="btn wh" id="rw"></button></div>`;
+  const c=$('#rCv'),x=cx2(c);
+  function scene(){tt++;R(x,0,0,160,90,'#1a0b33');for(let i=0;i<14;i++){R(x,i*2,0,2,70,i%2?'#7f1d1d':'#991b1b');R(x,158-i*2,0,2,70,i%2?'#7f1d1d':'#991b1b')}
+    R(x,0,60,160,30,'#2e1065');R(x,28,58,104,4,'#7c2d12');
+    const sx=80+Math.sin(tt/30)*40;x.fillStyle='rgba(253,230,138,.18)';x.beginPath();x.moveTo(80,0);x.lineTo(sx-22,60);x.lineTo(sx+22,60);x.fill();
+    const q=RQ[Math.min(r,4)].sc;
+    const act=personCanvas('#fbbf24','#ec4899','#312e81');x.drawImage(act,74,38+Math.round(Math.sin(tt/6)));
+    if(q==='hand'){R(x,86,47,10,2,'#fde2c8');if((tt>>4)%2)R(x,96,46,2,4,'#fde2c8')}
+    if(q==='curtain'){for(let i=0;i<5;i++)x.fillText&&R(x,40+i*20,20+((tt>>3)+i)%3*3,3,4,'#d9f99d')}
+    if(q==='note'){R(x,120,70,8,6,'#fffaf2');R(x,121,72,6,1,'#140726');if((tt>>4)%2)R(x,126,66,2,2,'#fde68a')}
+    if(q==='ask'){R(x,96,30,22,10,'#fff');R(x,98,33,4,4,'#140726');R(x,104,33,4,4,'#140726');R(x,110,33,4,4,'#140726')}
+    if(q==='lobby'){for(let i=0;i<3;i++)R(x,30+i*44,20,10,8,(tt>>3)%3===i?'#fff':'#a78bfa')}
+    // audience heads
+    for(let i=0;i<12;i++){const b=((tt>>3)+i)%4===0?1:0;R(x,6+i*13,80-b,9,10,'#140726');R(x,8+i*13,82-b,5,2,'#312e81')}
+    // you
+    R(x,74,78,12,12,'#8b5cf6');R(x,76,81,2,2,'#fff');R(x,82,81,2,2,'#fff');
+    raf=requestAnimationFrame(scene)}scene();
+  function ask(){const q=RQ[r];$('#rq').textContent=q.q;$('#ra').textContent=q.a;$('#rw').textContent=q.w;$$('#rprog i').forEach((e,i)=>e.classList.toggle('f',i<r));
+    const bar=$('#rt');bar.style.transition='none';bar.style.width='100%';void bar.offsetWidth;bar.style.transition='width 4s linear';bar.style.width='0%';
+    $('#ra').disabled=$('#rw').disabled=false;clearTimeout(timer);timer=setTimeout(()=>pick('w',true),4000);tone(880,.08,'square',.04,1.3)}
+  function pick(k,timeout){clearTimeout(timer);$('#ra').disabled=$('#rw').disabled=true;if(k==='a'){a++;SFX.ok();burst()}else{w++;timeout?toast('⏰ 조용히 지켜봤어요…',900):SFX.sel()}
+    LOG.reactions++;r++;setTimeout(()=>r<5?ask():end(),650)}
+  function burst(){const rr=$('.rscene').getBoundingClientRect();confetti(rr.left+rr.width/2,rr.top+rr.height/2,24)}
+  $('#ra').onclick=()=>pick('a');$('#rw').onclick=()=>pick('w');
+  function end(){cancelAnimationFrame(raf);SC.E+=a;SC.I+=w;finishZone(3,a>w?'E':'I',{title:'리액션 측정 완료!',big:`🙌${a} : 👀${w}`,text:a>w?'무대와 함께 호흡하는 <b>E 참여파</b>! 떼창, 이머시브, 관객참여형 공연이 잘 맞아요.':'온전히 몰입해 감상하는 <b>I 감상파</b>! 집중해서 보는 정통 공연이 잘 맞아요.',fans:2})}
+  ask()}
+
+/* --- reward & zone finish --- */
+function finishZone(id,letter,rw){const z=ZONES[id];z.done=true;const ai=axOfZone(id);LETTERS[ai]=letter;pieces++;
+  box.innerHTML=`<div class="reward"><canvas class="px" id="rwCv" width="24" height="30"></canvas><h4>${rw.title}</h4><div class="big">${rw.big}</div><p>${rw.text}</p>
+    <p style="margin-top:10px;font-family:Jua;color:#7c3aed">🎫 골든 티켓 조각 ${pieces}/4 획득! · 👥 관객 +${rw.fans}</p>
+    <div style="margin-top:14px"><button class="btn" id="rwOk">${pieces>=4?'✨ 중앙 극장으로!':'계속 탐험하기 ▶'}</button></div></div>`;
+  const rc=cx2($('#rwCv'));R(rc,0,0,24,30,'#140726');R(rc,1,1,22,28,'#fcd34d');R(rc,1,24,22,5,'#f59e0b');R(rc,4,5,16,2,'#fff');R(rc,4,10,10,2,'#b45309');R(rc,4,14,14,2,'#b45309');
+  [0,0,0].forEach((_,i)=>R(rc,0,8+i*7,2,3,'#140726'));
+  SFX.ok();const r=box.getBoundingClientRect();confetti(r.left+r.width/2,r.top+80,60);
+  $('#rwOk').onclick=()=>{closeMG();// update hud
+    $$('.slot').forEach((s,i)=>s.classList.toggle('got',i<pieces));
+    setTimeout(()=>{$('#lt'+ai).querySelector('em').textContent=letter;$('#lt'+ai).classList.add('on');$('#mt'+ai).classList.add('done');tone(1046,.15,'square',.05)},300);
+    for(let i=0;i<rw.fans;i++)setTimeout(()=>spawnFan(),300+i*250);
+    const remain=4-pieces;$('#hint').innerHTML=remain?`좋아요! 조각이 <b style="color:#d9f99d">${remain}개</b> 남았어요<br>깃발 없는 건물을 찾아보세요`:'🎉 조각을 모두 모았어요!<br>중앙 <b style="color:#d9f99d">골든 티켓 극장</b>으로!';
+    if(pieces>=4)toast('✨ 골든 티켓 극장 문이 열렸어요!',2600)}}
+const FANC=['#f472b6','#60a5fa','#a3e635','#fbbf24','#f87171','#34d399','#c4b5fd','#fb923c'];
+function spawnFan(){fans.push({x:GATE.dx+(Math.random()-.5)*20,y:GATE.dy+6,c:FANC[fans.length%FANC.length],t:Math.random()*60|0,h:0,v:null});fanCount=fans.length;
+  $('#fanN').textContent=(myTheater?myTheater.aud:0)+fanCount*25;bump('#fanChip');SFX.fan()}
+
+/* 3D tilt */
+function tilt(el,max=10){el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+  el.style.transform=`rotateY(${px*max}deg) rotateX(${-py*max}deg) translateZ(6px)`;el.style.setProperty('--mx',(px+.5)*100+'%');el.style.setProperty('--my',(py+.5)*100+'%')});
+  el.addEventListener('pointerleave',()=>el.style.transform='')}
+
+/* confetti fx */
+const FX=$('#fx'),fxx=FX.getContext('2d');let fxp=[],fxOn=false;
+function confetti(x0=innerWidth/2,y0=innerHeight/3,n=80){FX.width=innerWidth;FX.height=innerHeight;const cols=['#d9f99d','#c4b5fd','#f9a8d4','#fcd34d','#8b5cf6','#fff'];
+  for(let i=0;i<n;i++){const a=Math.random()*6.28,s=2+Math.random()*6;fxp.push({x:x0,y:y0,vx:Math.cos(a)*s,vy:Math.sin(a)*s-3,s:4+((Math.random()*3)|0)*2,c:cols[i%cols.length],l:70+Math.random()*40})}
+  if(!fxOn){fxOn=true;(function f(){fxx.clearRect(0,0,FX.width,FX.height);fxp=fxp.filter(p=>p.l-->0);fxp.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.18;p.vx*=.98;fxx.fillStyle=p.c;fxx.fillRect(p.x|0,p.y|0,p.s,p.s)});
+    if(fxp.length)requestAnimationFrame(f);else{fxOn=false;fxx.clearRect(0,0,FX.width,FX.height)}})()}}
+
+/* ================= START ================= */
+$('#goBtn').onclick=async()=>{bgmPlay('town');SFX.ok();const ir=$('#iris');ir.className='iris close';await sleep(700);
+  $('#intro').classList.remove('on');$('#game').classList.add('on');ir.className='iris open';startTime=Date.now();gameRunning=true;loop();await sleep(800);ir.className='iris'};
+
+/* ================= FINALE ================= */
+async function finale(){gameRunning=false;bgmPlay('end');SFX.door();const ir=$('#iris');ir.className='iris close';await sleep(750);
+  $('#game').classList.remove('on');const F=$('#finale');F.classList.add('on');scrollTo(0,0);
+  F.innerHTML=`<div class="assemble" id="asm"><div class="msg" id="asmMsg">흩어진 티켓 조각을 맞추는 중…</div></div>`;ir.className='iris open';
+  const asm=$('#asm');const pos=[[-160,-140],[160,-140],[-160,160],[160,160]];const ps=pos.map((p,i)=>{const d=document.createElement('div');d.className='piece';
+    d.style.clipPath=['polygon(0 0,100% 0,100% 50%,50% 50%,50% 100%,0 100%)','polygon(0 0,100% 0,100% 100%,50% 100%,50% 50%,0 50%)','polygon(0 0,50% 0,50% 50%,100% 50%,100% 100%,0 100%)','polygon(50% 0,100% 0,100% 100%,0 100%,0 50%,50% 50%)'][i];
+    d.style.transform=`translate(${p[0]}px,${p[1]}px) rotate(${(i-1.5)*60}deg)`;asm.appendChild(d);return d});
+  await sleep(500);ps.forEach((d,i)=>{d.style.transition=`transform .8s cubic-bezier(.3,1.4,.5,1) ${i*.15}s`;d.style.transform='translate(0,0) rotate(0)';setTimeout(()=>tone(400+i*150,.1),i*150+500)});
+  await sleep(1600);$('#asmMsg').textContent='✨ 골든 티켓 완성! ✨';SFX.ok();confetti(innerWidth/2,innerHeight/2.5,90);
+  ps.forEach(d=>{d.style.transition='transform .9s ease-in, opacity .9s';d.style.transform='scale(1.4) rotateY(540deg)';d.style.opacity='0'});
+  await sleep(1000);ir.className='iris';showResult()}
+
+function showResult(){const code=LETTERS.join(''),T=TYPES[code],tp=tpal(code);
+  const pct=AX.map(a=>{const A=SC[a.a],B=SC[a.b],s=A+B||1;return Math.round(A/s*100)});
+  const opp=code.split('').map((l,i)=>l===AX[i].a?AX[i].b:AX[i].a).join('');
+  const best=code.slice(0,3)+(code[3]==='J'?'P':'J'); // 계획/즉흥만 다른 짝꿍
+  const secs=Math.round((Date.now()-startTime)/1000);
+  const F=$('#finale');F.innerHTML=`
+  <div style="text-align:center;color:#fff;margin-bottom:6px"><span class="kicker">GAME CLEAR · 나의 공연 MBTI</span></div>
+  <div class="ticketStage"><div class="ticket" id="ticket"><div class="tface">
+    <div class="holo"></div><div class="shine"></div><span class="notch l"></span><span class="notch r"></span><span class="perf"></span>
+    <div class="tk-top"><span>GOLDEN TICKET</span><span>No.${String(Math.floor(Math.random()*9000)+1000)}</span></div>
+    <div class="code">${code.split('').map((l,i)=>`<span style="background:${['#fcd34d','#c4b5fd','#f9a8d4','#d9f99d'][i]};animation-delay:${.2+i*.15}s">${l}</span>`).join('')}</div>
+    <div class="tk-char" id="tkChar" title="틱키를 눌러보세요!"></div>
+    <div class="tk-name">${T.e} ${T.n}</div>
+    <div class="tk-one">${AX.map((a,i)=>code[i]===a.a?a.an:a.bn).join(' · ')}</div>
+    <div class="tk-axes">${AX.map((a,i)=>`<div class="ax"><span class="${code[i]===a.a?'on':''}">${a.a} ${a.an.split('·')[0]}</span><div class="tr"><i data-w="${pct[i]}"></i></div><span class="${code[i]===a.b?'on':''}">${a.bn.split('·')[0]} ${a.b}</span></div>`).join('')}</div>
+    <div class="tk-foot"><span>ADMIT ONE · TIX-AI</span><span>${new Date().toLocaleDateString('ko-KR')}</span></div>
+  </div></div></div>
+  <p style="text-align:center;color:var(--p300);font-family:Jua;font-size:13px;margin-top:10px">👆 티켓을 기울여 보고, 틱키를 콕 눌러보세요!</p>
+
+  <div class="card rsec"><div class="rhead" style="color:var(--ink)"><span class="pix" style="color:#fff">TYPE</span>${code} 은 어떤 관객?</div>
+    <div class="kw">${T.kw.map(k=>`<span>#${k}</span>`).join('')}</div><p class="desc">${T.d}</p>
+    <div style="margin-top:12px;display:grid;gap:6px">${AX.map((a,i)=>{const p=code[i]===a.a?pct[i]:100-pct[i];return `<div style="font-size:13px"><b style="font-family:Jua">${code[i]===a.a?a.an:a.bn} ${p}%</b> · ${ZN[a.zone]}에서 확인했어요</div>`}).join('')}</div></div>
+
+  <div class="rsec"><div class="rhead"><span class="pix">PICK</span>${TODAY.getMonth()+1}월, ${code}에게 추천하는 공연</div>
+    <div class="card" id="recs"></div>
+    <p style="color:var(--p300);font-size:11.5px;margin-top:8px;line-height:1.5">📅 ${TODAY.getFullYear()}.${String(TODAY.getMonth()+1).padStart(2,'0')}.${String(TODAY.getDate()).padStart(2,'0')} 기준 · 지금 공연 중이거나 45일 안에 개막하는 작품만 골랐어요${LIVE.length?' · KOPIS 실시간 데이터 반영':''}</p></div>
+
+  <div class="rsec"><div class="rhead"><span class="pix">MATCH</span>관객 궁합</div>
+    <div class="match"><div class="card" id="mBest"><small>BEST 동행</small></div><div class="card" id="mOpp"><small>정반대 취향</small></div></div></div>
+
+  <div class="rsec"><div class="rhead"><span class="pix">LOG</span>나의 모험 기록</div>
+    <div class="log"><div>🏛️ 내가 지은 극장<b>${LOG.theater} (${myTheater.big?'환상 극장':'현실 극장'})</b></div><div>🧪 내가 만든 포션<b>${LOG.potion}</b></div>
+      <div>🎤 합격시킨 배우<b>${LOG.hires.slice(0,2).join(', ')} 외</b></div><div>👣 걸음 · 🪙 코인<b>${P.steps*4}걸음 · ${coins}/8개</b></div>
+      <div>👥 모은 관객<b>${((myTheater?myTheater.aud:0)+fans.length*25).toLocaleString()}명</b></div><div>⏱️ 플레이 시간<b>${Math.floor(secs/60)}분 ${secs%60}초</b></div></div></div>
+
+  <div class="rsec"><div class="rhead"><span class="pix">16</span>공연 MBTI 도감</div><div class="dex" id="dex"></div></div>
+
+  <div class="actions"><button class="btn wh" id="copyBtn">🔗 결과 복사</button><button class="btn" id="againBtn">↻ 다시 플레이</button></div>
+  <div class="foot">추천 공연은 방문한 날짜 기준으로 자동으로 바뀌어요 · 공연 정보: KOPIS 공연예술통합전산망 · 각 공식 예매처<br>캐릭터와 일러스트는 모두 오리지널 픽셀 아트예요.<br>틱키의 잃어버린 티켓 · Inspired by <a href="https://tixtory.joripspace.run/" target="_blank" rel="noopener">TIXTORY</a></div>`;
+  F.querySelector('#tkChar').appendChild(tk16(tp,code));$('#tkChar').onclick=e=>{laugh();const cv=$('#tkChar canvas');cv.classList.remove('hop');void cv.offsetWidth;cv.classList.add('hop');floatSay(e.clientX,e.clientY)};
+  const tk=$('#ticket');tilt(tk,14);tk.animate([{transform:'rotateY(-180deg) scale(.6)',opacity:0},{transform:'rotateY(15deg) scale(1.03)',opacity:1,offset:.7},{transform:'none'}],{duration:1100,easing:'cubic-bezier(.2,1,.3,1)'});
+  setTimeout(()=>$$('.ax .tr i').forEach(i=>i.style.width=i.dataset.w+'%'),700);
+  // recs
+  const RECS=getRecs(code);
+  if(!RECS.length)$('#recs').innerHTML='<p style="font-size:14px;line-height:1.6">지금 추천할 수 있는 공연 정보를 업데이트하고 있어요. 곧 새로운 공연으로 찾아올게요! 🎫</p>';
+  RECS.forEach(s=>{const d=document.createElement('div');d.className='rec';
+    if(s.poster){const im=document.createElement('img');im.src=s.poster;im.alt=s.title+' 포스터';im.loading='lazy';im.className='poster';im.onerror=()=>im.replaceWith(pixIcon(s));d.appendChild(im)}else d.appendChild(pixIcon(s));
+    const stc=s.st.k==='end'?'#f43f5e':s.st.k==='soon'?'#f59e0b':'#16a34a';
+    d.insertAdjacentHTML('beforeend',`<div><span class="gtag">${GLABEL[s.genre]||'공연'}</span> <span class="gtag" style="background:${stc};color:#fff">${s.st.txt}</span><b>${s.title}</b><small>${period(s)}<br>${s.venue}${s.region?' · '+s.region:''}</small><small style="color:#7c3aed;margin-top:3px">✨ ${whyLine(s,code)}</small><a href="${s.url}" target="_blank" rel="noopener">🎟️ ${s.booking?s.booking+'에서 ':''}예매하기 ↗</a></div>`);$('#recs').appendChild(d)});
+  function pixIcon(s){const c=mk(16,16),x=cx2(c),gc=GCOL[s.genre]||GCOL.musical;for(let y=0;y<16;y++)R(x,0,y,16,1,y<8?gc[0]:gc[1]);for(let i=0;i<5;i++)R(x,(i*7)%16,(i*5)%8,1,1,'#fff');grid(x,TK,tp,2,3);return c}
+  const mcard=(id,c)=>{const el=$(id);el.appendChild(tk16(tpal(c),c));el.insertAdjacentHTML('beforeend',`<b>${TYPES[c].n}</b><em>${c}</em>`);el.onclick=()=>openDex(c)};mcard('#mBest',best);mcard('#mOpp',opp);
+  Object.keys(TYPES).forEach(c=>{const d=document.createElement('div');if(c===code)d.className='me';d.appendChild(tk16(tpal(c),c));d.insertAdjacentHTML('beforeend',`<b>${c}</b>`);d.onclick=()=>openDex(c);$('#dex').appendChild(d)});
+  $('#copyBtn').onclick=()=>{const txt=`🎫 나의 공연 MBTI는 ${code} "${T.n}"!\n${AX.map((a,i)=>code[i]===a.a?a.an:a.bn).join(' · ')}\n추천 공연: ${RECS.map(r=>r.title).join(', ')}\n#틱키의잃어버린티켓 #공연MBTI`;
+    (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>toast('📋 결과가 복사됐어요!')).catch(()=>toast('복사에 실패했어요'))};
+  $('#againBtn').onclick=()=>location.reload();
+  SFX.ok();setTimeout(()=>confetti(innerWidth/2,innerHeight/3,120),600)}
+
+function openDex(c){const t=TYPES[c];SFX.sel();$('#sheetIn').innerHTML=`<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px" id="dxh"></div>
+  <div class="kw">${t.kw.map(k=>`<span>#${k}</span>`).join('')}</div><p class="desc">${t.d}</p>
+  <div style="margin-top:10px;display:grid;gap:6px">${getRecs(c).map(r=>`<a href="${r.url}" target="_blank" rel="noopener" style="font-family:Jua;color:#5b21b6;text-decoration:none">🎟️ ${r.title} <small style="color:#6b5a86">· ${GLABEL[r.genre]} · ${r.st.txt}</small></a>`).join('')}</div>
+  <button class="btn sm" style="margin-top:12px" onclick="$('#sheet').classList.remove('on')">닫기</button>`;
+  const h=$('#dxh'),cv=tk16(tpal(c),c);cv.style.cssText='width:64px;height:64px';h.appendChild(cv);h.insertAdjacentHTML('beforeend',`<div><span class="pix" style="font-size:12px;color:#7c3aed">${c}</span><div style="font-family:Jua;font-size:22px">${t.e} ${t.n}</div></div>`);
+  $('#sheet').classList.add('on')}
+$('#sheet').onclick=e=>{if(e.target.id==='sheet')$('#sheet').classList.remove('on')};
+</script>
+</body>
+</html>

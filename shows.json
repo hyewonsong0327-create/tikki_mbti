@@ -1,0 +1,309 @@
+{
+  "updated": "2026-11-13",
+  "_help": "공연을 추가하려면 shows 배열에 항목을 하나 더 넣으세요. 자세한 방법은 README.md 참고",
+  "shows": [
+    {
+      "id": "twocities",
+      "title": "뮤지컬 <두 도시 이야기>",
+      "genre": "musical",
+      "start": "2026-11-11",
+      "end": "2027-02-08",
+      "venue": "광림아트센터 BBCH홀",
+      "region": "서울 강남구",
+      "url": "https://nol.yanolja.com/ticket/products/26013098",
+      "types": [
+        "ENFJ",
+        "ISTJ",
+        "INFJ"
+      ]
+    },
+    {
+      "id": "sweeney",
+      "title": "뮤지컬 <스위니토드> 10주년",
+      "genre": "musical",
+      "start": "2026-12-04",
+      "end": "2027-05-02",
+      "venue": "디큐브 링크아트센터",
+      "region": "서울 구로구",
+      "url": "https://nol.yanolja.com/ticket/products/26014509",
+      "types": [
+        "ENTJ",
+        "ISTP",
+        "INTJ"
+      ]
+    },
+    {
+      "id": "phantom",
+      "title": "뮤지컬 <오페라의 유령> 40주년",
+      "genre": "musical",
+      "start": "2026-12-22",
+      "end": "2027-02-28",
+      "venue": "블루스퀘어 우리은행홀",
+      "region": "서울 용산구",
+      "url": "https://nol.yanolja.com/ticket/products/26013995",
+      "types": [
+        "ENTJ",
+        "ENFJ",
+        "INFP"
+      ],
+      "months": [
+        12,
+        1
+      ]
+    },
+    {
+      "id": "frozen",
+      "title": "뮤지컬 <겨울왕국> 한국 초연",
+      "genre": "musical",
+      "start": "2026-08-13",
+      "end": "2027-03-01",
+      "venue": "샤롯데씨어터",
+      "region": "서울 송파구",
+      "url": "https://nol.yanolja.com/ticket/products/26007416",
+      "types": [
+        "ENFJ",
+        "ENFP"
+      ],
+      "months": [
+        12,
+        1,
+        2
+      ]
+    },
+    {
+      "id": "doubtfire",
+      "title": "뮤지컬 <미세스 다웃파이어>",
+      "genre": "musical",
+      "start": "2026-12-03",
+      "end": "2027-02-21",
+      "venue": "GS아트센터",
+      "region": "서울 강남구",
+      "url": "https://nol.yanolja.com/ticket/products/26014015",
+      "types": [
+        "ESTJ",
+        "ESFJ",
+        "ESFP"
+      ],
+      "months": [
+        12
+      ]
+    },
+    {
+      "id": "chicago",
+      "title": "뮤지컬 <시카고>",
+      "genre": "musical",
+      "start": "2026-12-05",
+      "end": "2027-03-14",
+      "venue": "LG아트센터 서울 LG SIGNATURE홀",
+      "region": "서울 강서구",
+      "url": "https://nol.yanolja.com/ticket/products/L0000150",
+      "types": [
+        "ESFP",
+        "ENTJ"
+      ]
+    },
+    {
+      "id": "rebecca",
+      "title": "뮤지컬 <레베카>",
+      "genre": "musical",
+      "start": "2026-11-24",
+      "end": "2027-03-14",
+      "venue": "충무아트센터 대극장",
+      "region": "서울 중구",
+      "url": "https://nol.yanolja.com/ticket/products/26013993",
+      "types": [
+        "INTJ",
+        "INFJ"
+      ]
+    },
+    {
+      "id": "gone",
+      "title": "뮤지컬 <곤 투모로우> 10주년",
+      "genre": "musical",
+      "start": "2026-09-15",
+      "end": "2026-11-29",
+      "venue": "홍익대 대학로 아트센터 대극장",
+      "region": "서울 종로구",
+      "url": "https://nol.yanolja.com/ticket/products/26011520",
+      "types": [
+        "ISFJ",
+        "INFJ"
+      ]
+    },
+    {
+      "id": "laundry",
+      "title": "뮤지컬 <빨래> 32차 프로덕션",
+      "genre": "musical",
+      "start": "2026-06-11",
+      "end": "2027-02-21",
+      "venue": "NOL 유니플렉스 2관",
+      "region": "서울 종로구",
+      "url": "https://nol.yanolja.com/ticket/products/26007159",
+      "types": [
+        "ESFJ",
+        "ISFJ",
+        "ISFP"
+      ]
+    },
+    {
+      "id": "sleepnomore",
+      "title": "<슬립노모어 서울> 이머시브 연극",
+      "genre": "play",
+      "start": "2025-07-24",
+      "end": null,
+      "venue": "매키탄 호텔 (충무로)",
+      "region": "서울 중구",
+      "url": "https://nol.yanolja.com/ticket/products/25008376",
+      "types": [
+        "ENTP",
+        "ENFP",
+        "INTP"
+      ],
+      "openrun": true
+    },
+    {
+      "id": "rothko",
+      "title": "연극 <로스코>",
+      "genre": "play",
+      "start": "2026-11-13",
+      "end": "2026-11-15",
+      "venue": "LG아트센터 서울",
+      "region": "서울 강서구",
+      "url": "https://nol.yanolja.com/ticket/products/L0000135",
+      "types": [
+        "ENTP",
+        "ISTP",
+        "INTJ",
+        "INTP"
+      ]
+    },
+    {
+      "id": "glass",
+      "title": "연극 <유리동물원>",
+      "genre": "play",
+      "start": "2026-10-17",
+      "end": "2026-11-22",
+      "venue": "예술의전당 CJ 토월극장",
+      "region": "서울 서초구",
+      "url": "https://nol.yanolja.com/ticket/products/26011438",
+      "types": [
+        "ISTJ",
+        "ISFJ",
+        "INTP"
+      ]
+    },
+    {
+      "id": "flower",
+      "title": "연극 <꽃의 비밀>",
+      "genre": "play",
+      "start": "2026-09-12",
+      "end": "2026-11-29",
+      "venue": "링크아트센터 벅스홀",
+      "region": "서울 종로구",
+      "url": "https://nol.yanolja.com/ticket/products/26011174",
+      "types": [
+        "ESTJ",
+        "ESTP"
+      ]
+    },
+    {
+      "id": "killing",
+      "title": "연극 <죽여주는 이야기>",
+      "genre": "play",
+      "start": null,
+      "end": null,
+      "venue": "지인시어터",
+      "region": "서울 종로구",
+      "url": "https://nol.yanolja.com/ticket/products/26003518",
+      "types": [
+        "ESTP",
+        "ENTP"
+      ],
+      "openrun": true
+    },
+    {
+      "id": "criminal",
+      "title": "연극 <크리미널 시즌4>",
+      "genre": "play",
+      "start": null,
+      "end": null,
+      "venue": "봄날아트홀",
+      "region": "서울 종로구",
+      "url": "https://nol.yanolja.com/ticket/products/17000544",
+      "types": [
+        "ESTJ",
+        "ESTP",
+        "ISTJ",
+        "ISTP"
+      ],
+      "openrun": true
+    },
+    {
+      "id": "jaurim",
+      "title": "자우림 [MIDNIGHT EXPRESS 2026-2027] 서울",
+      "genre": "concert",
+      "start": "2026-12-18",
+      "end": "2026-12-20",
+      "venue": "올림픽공원 올림픽홀",
+      "region": "서울 송파구",
+      "url": "https://nol.yanolja.com/ticket/products/26015207",
+      "types": [
+        "ESFP"
+      ],
+      "months": [
+        12
+      ]
+    },
+    {
+      "id": "ghibli",
+      "title": "크리스마스 지브리 & 디즈니 OST 콘서트",
+      "genre": "classic",
+      "start": "2026-12-21",
+      "end": "2026-12-21",
+      "venue": "롯데콘서트홀",
+      "region": "서울 송파구",
+      "url": "https://nol.yanolja.com/ticket/products/26014525",
+      "types": [
+        "ESFJ",
+        "ENFP",
+        "ISFP",
+        "INFP"
+      ],
+      "months": [
+        12
+      ]
+    },
+    {
+      "id": "nutcracker",
+      "title": "유니버설발레단 <호두까기인형>",
+      "genre": "dance",
+      "start": "2026-12-17",
+      "end": "2026-12-30",
+      "venue": "세종문화회관 대극장",
+      "region": "서울 종로구",
+      "url": "https://nol.yanolja.com/ticket/places/P1001005/products/P0004869",
+      "types": [
+        "ISFP"
+      ],
+      "months": [
+        12
+      ]
+    },
+    {
+      "id": "knb",
+      "title": "국립발레단 <호두까기인형>",
+      "genre": "dance",
+      "start": "2026-12-12",
+      "end": "2026-12-27",
+      "venue": "예술의전당 오페라극장",
+      "region": "서울 서초구",
+      "url": "https://www.sac.or.kr/site/main/show/show_view?SN=86292",
+      "types": [
+        "INFP"
+      ],
+      "months": [
+        12
+      ]
+    }
+  ]
+}
